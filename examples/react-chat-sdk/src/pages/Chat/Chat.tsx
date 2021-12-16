@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { MessageList } from 'react-chat-elements'
 import { useNavigate } from 'react-router-dom'
 
@@ -53,9 +53,14 @@ const Chat = () => {
 
 
   useEffect(() => {
-    getProfile()
-    getChats()
-    subscribeChats()
+    const token = localStorage.getItem('token')
+    if (token) {
+      getProfile()
+      getChats()
+      subscribeChats()
+    } else {
+      navigate('/login')
+    }
 
     return () => {
       if (subscribeKey) {
@@ -85,7 +90,7 @@ const Chat = () => {
     return chats?.map(item => {
       const isCreated = item.createdBy?.email === user.email
       return {
-        title: isCreated ? 'You' : 'Anonymous',
+        title: isCreated ? null : item.createdBy ? item.createdBy.firstName : 'Anonymous',
         text: item.text,
         date: new Date(item.createdAt),
         type: 'text',
@@ -99,8 +104,8 @@ const Chat = () => {
       className='chat-container'
     >
       <MessageList
+        className='chat-list'
         lockable={true}
-        toBottomHeight={'100%'}
         dataSource={dataSource}
       />
       <form onSubmit={handleSubmit} className='chat-input-wrapper'>
