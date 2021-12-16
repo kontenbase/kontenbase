@@ -1,6 +1,7 @@
 
 .chat-container {
   padding: 12px;
+  height: 100%;
 }
 
 .chat-input-wrapper {
@@ -34,4 +35,8 @@
   border-radius: 4px;
   cursor: pointer;
   margin-right: 10px;
+}
+
+.chat-list {
+  height: calc(100vh - 80px);
 }
