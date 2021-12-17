@@ -48,4 +48,12 @@ describe('Filter', () => {
 
     expect(result).toBe('$skip=1&$limit=1');
   });
+
+  test('sort', async () => {
+    const result = serviceProto._filter({
+      sort: { name: 1 },
+    });
+
+    expect(result).toBe('$sort[name]=1');
+  });
 });

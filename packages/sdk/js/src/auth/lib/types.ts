@@ -8,15 +8,22 @@ export interface AuthResponseFailure extends AuthResponseBase {
   data?: null;
 }
 
-export interface AuthSingleResponseSuccess<T> extends AuthResponseBase {
+export interface AuthResponseSuccess<T> extends AuthResponseBase {
   data?: Session;
   error?: null;
 }
 
-export type AuthSingleResponse<T> =
-  | AuthSingleResponseSuccess<T>
-  | AuthResponseFailure;
+export type AuthResponse<T> = AuthResponseSuccess<T> | AuthResponseFailure;
 
 export interface Session {
   token: string;
 }
+
+export interface ProfileResponseSuccess<T> extends AuthResponseBase {
+  data?: T;
+  error?: null;
+}
+
+export type ProfileResponse<T> =
+  | ProfileResponseSuccess<T>
+  | AuthResponseFailure;
