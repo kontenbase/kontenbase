@@ -1,4 +1,4 @@
-# Char example
+# Chat example
 
 ## Getting Started
 
