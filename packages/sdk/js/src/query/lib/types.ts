@@ -29,10 +29,16 @@ export type KontenbaseSingleResponse<T> =
   | KontenbaseSingleResponseSuccess<T>
   | KontenbaseResponseFailure;
 
+export enum Sort {
+  ASC = 1,
+  DESC = -1,
+}
+
 export interface FindOption {
   limit?: number;
   skip?: number;
   where?: any;
+  sort?: { [key: string]: Sort };
 }
 
 export interface QueryClientOption {

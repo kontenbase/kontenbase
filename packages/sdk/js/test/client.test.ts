@@ -1,4 +1,4 @@
-import { KontenbaseClient, createClient } from '../src';
+import { KontenbaseClient, createClient, Sort } from '../src';
 
 const URL = process.env.URL || '';
 const API_KEY = process.env.API_KEY || '';
@@ -64,6 +64,7 @@ describe('Client', () => {
 
   test('find', async () => {
     const response = await kontenbase.service<Model>(SERVICE_NAME).find();
+
     expect(response.status).toBe(200);
   });
 

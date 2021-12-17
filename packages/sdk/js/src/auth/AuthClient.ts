@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { STORAGE_KEY } from './lib/constants';
 import { isBrowser } from './lib/helpers';
-import { AuthResponseFailure, AuthSingleResponse } from './lib/types';
+import {
+  AuthResponseFailure,
+  AuthResponse,
+  ProfileResponse,
+} from './lib/types';
 
 export default class AuthClient {
   protected url: string;
@@ -41,7 +45,7 @@ export default class AuthClient {
   async login<T = any>(body: {
     email: string;
     password: string;
-  }): Promise<AuthSingleResponse<T>> {
+  }): Promise<AuthResponse<T>> {
     return new Promise(async (resolve, reject) => {
       try {
         const { data, status, statusText } = await axios.post(
@@ -60,7 +64,7 @@ export default class AuthClient {
     });
   }
 
-  async register<T = any>(body: Partial<T>): Promise<AuthSingleResponse<T>> {
+  async register<T = any>(body: Partial<T>): Promise<AuthResponse<T>> {
     return new Promise(async (resolve, reject) => {
       try {
         const { data, status, statusText } = await axios.post(
@@ -79,16 +83,15 @@ export default class AuthClient {
     });
   }
 
-  async profile<T = any>(): Promise<AuthSingleResponse<T>> {
+  async profile<T = any>(): Promise<ProfileResponse<T>> {
     return new Promise(async (resolve, reject) => {
       try {
-        const { data, status, statusText } = await axios.get(
+        const { data, status, statusText } = await axios.get<T>(
           `${this.url}/profile`,
           {
             headers: this._headers(),
           },
         );
-        this.currentToken = data.token;
         resolve({
           data,
           status,

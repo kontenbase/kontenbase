@@ -48,6 +48,12 @@ export default class QueryClient<T> {
         filter['$limit'] = find.limit;
         delete find.limit;
       }
+
+      if (find.sort) {
+        filter['$sort'] = find.sort;
+        delete find.sort;
+      }
+
       if (find.where) {
         filter = {
           ...filter,
