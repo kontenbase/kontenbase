@@ -33,8 +33,13 @@ const Home: NextPage = () => {
   }
 
   useEffect(() => {
-    getProfile()
-    getData()
+    const token = localStorage.getItem('token')
+    if (token) {
+      getProfile()
+      getData()
+    } else {
+      router.replace('/login')
+    }
   }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
