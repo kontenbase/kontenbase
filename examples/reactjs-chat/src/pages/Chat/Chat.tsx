@@ -7,6 +7,7 @@ import kontenbase from '../../lib/kontenbase'
 import 'react-chat-elements/dist/main.css'
 import './Chat.css'
 import ChatType from '../../types/Chat'
+import { Sort } from '@kontenbase/sdk'
 
 const SERVICE_NAME = 'chats'
 
@@ -28,9 +29,13 @@ const Chat = () => {
   }
 
   const getChats = () => {
-    kontenbase.service<ChatType>(SERVICE_NAME).find()
+    kontenbase.service<ChatType>(SERVICE_NAME).find({
+      sort: {
+        createdAt: Sort.DESC
+      }
+    })
       .then(res => {
-        setChats(res.data)
+        setChats(res.data?.reverse())
       })
       .catch((err: any) => {
         alert(err.message)
@@ -86,6 +91,11 @@ const Chat = () => {
     }
   }
 
+  const handleLogout = () => {
+    kontenbase.auth.logout()
+    navigate('/login')
+  }
+
   const dataSource = useMemo(() => {
     return chats?.map(item => {
       const isCreated = item.createdBy?.email === user.email
@@ -100,29 +110,41 @@ const Chat = () => {
   }, [chats, user])
 
   return (
-    <div
-      className='chat-container'
-    >
-      <MessageList
-        className='chat-list'
-        lockable={true}
-        dataSource={dataSource}
-      />
-      <form onSubmit={handleSubmit} className='chat-input-wrapper'>
-        <input
-          placeholder="Type here..."
-          ref={inputRef}
-          className='chat-input'
-          autoFocus
-        />
+    <>
+      <nav>
+        <div className='title'>Chat</div>
         <button
-          type="submit"
-          className='chat-button'
+          className='logout'
+          onClick={handleLogout}
         >
-          Send
+          Logout
         </button>
-      </form>
-    </div>
+      </nav>
+      <div
+        className='chat-container'
+      >
+        <MessageList
+          className='chat-list'
+          lockable={true}
+          dataSource={dataSource}
+        />
+        <form onSubmit={handleSubmit} className='chat-input-wrapper'>
+          <input
+            placeholder="Type here..."
+            ref={inputRef}
+            className='chat-input'
+            autoFocus
+          />
+          <button
+            type="submit"
+            className='chat-button'
+          >
+            Send
+          </button>
+        </form>
+      </div>
+    </>
+
   )
 }
 

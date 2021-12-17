@@ -1,6 +1,6 @@
 .container {
   padding: 0 20px;
-  max-width: 500px;
+  max-width: 700px;
   margin: auto;
 }
 
@@ -13,9 +13,8 @@
 
 .item {
   padding: 8px 12px;
-  border: 1px solid #f9b1a7;
+  border-bottom: 1px solid #eaeaea;
   margin-top: 12px;
-  border-radius: 4px;
   font-size: 20px;
   display: flex;
   justify-content: space-between;
@@ -23,5 +22,20 @@
 
 .deleteIcon {
   height: 20px;
+  cursor: pointer;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logout {
+  color:#ec4d37;
+  font-size: 14px;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
   cursor: pointer;
 }

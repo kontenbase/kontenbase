@@ -1,16 +1,40 @@
+body {
+  background-color: #f5f5f4;
+}
+
+nav {
+  background-color: #ec4d37;
+  color: white;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+} 
+
+.logout {
+  cursor: pointer;
+  font-size: 14px;
+  border: none;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
 .chat-container {
-  padding: 12px;
-  height: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: white;
 }
 
 .chat-input-wrapper {
-  position: fixed;
-  bottom: 0;
   width: 100%;
   display: flex;
-  left: 0;
-  margin-bottom: 10px;
+  padding-bottom: 10px;
   padding-top: 10px;
   border-top: 1px solid lightgrey;
 }
@@ -38,5 +62,5 @@
 }
 
 .chat-list {
-  height: calc(100vh - 80px);
+  height: calc(100vh - 115px);
 }
