@@ -40,15 +40,19 @@ We are currently in Alpha. Watch this repo to get notified.
 
 ## How it Works
 **1. Data Modelling**
+
 Design your API without Coding, it’s Easy!
 
 **2. Don't Reinvent the Wheel**
+
 from Auth, Storage, and Data Migration, it’s Battery Included!
 
 **3. Try API Right on Your Browser**
+
 Publish API without Ops! No deployment time, it’s Fast!
 
 **4. Consume API without Front-end Barrier**
+
 Whether React, Vue, Angular, it’s Freedom! 
 
 ## Project Examples
