@@ -22,9 +22,9 @@ npm install --save @kontenbase/sdk
 Configure package with your account's **API key** obtained from your [Kontenbase Dashboard](https://kontenbase.com).
 
 ```js
-const { KontenBaseClient } = require('@kontenbase/sdk')
+const { KontenbaseClient } = require('@kontenbase/sdk')
 
-const kontenbase = new KontenBaseClient({
+const kontenbase = new KontenbaseClient({
   apiKey: '*******************',
 })
 ```
