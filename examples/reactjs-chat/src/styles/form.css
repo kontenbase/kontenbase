@@ -1,36 +1,39 @@
 .form-container {
   max-width: 480px;
   margin: auto;
-  margin-top: 60px;
+  margin-top: 90px;
   padding: 0 20px;
 }
 
 .label {
   font-size: 14px;
+  display: flex;
+  margin-bottom: 8px;
 }
 
 .input {
-  border-color: #eaeaea;
+  border-color: #D7DBDF;
   width: -webkit-fill-available;
-  padding: 8px 12px;
+  padding: 12px 12px;
   font-size: 14px;
   border-radius: 4px;
-  border-style: double;
+  border-style: solid;
+  border-width: 1px;
 }
 
 .button {
   width: 100%;
   color: white;
-  background-color:#ec4d37;
+  background-color: var(--primary);
   font-size: 16px;
   border: none;
-  padding: 8px;
+  padding: 12px;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .input-wrapper {
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .button-wrapper {
