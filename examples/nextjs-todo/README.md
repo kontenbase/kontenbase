@@ -1,4 +1,4 @@
-# Todo List example
+# Todo example
 
 ## Getting Started
 

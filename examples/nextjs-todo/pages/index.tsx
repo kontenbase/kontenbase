@@ -11,7 +11,7 @@ interface Item {
   name: string
 }
 
-const SERVICE_NAME = 'New Service'
+const SERVICE_NAME = 'todos'
 
 const Home: NextPage = () => {
   const router = useRouter()
@@ -80,7 +80,7 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.nav}>
-        <h1>Todo List</h1>
+        <h1>Todo</h1>
         <button
           className={styles.logout}
           onClick={handleClick}
