@@ -44,6 +44,14 @@
   height: calc(100vh - 140px);
 }
 
+.rce-mbox.rce-mbox-right {
+  background-color: #E5FFCC;
+}
+
+.rce-mbox-right-notch {
+  fill: #E5FFCC;
+}
+
 @media only screen and (max-width: 600px) {
   .chat-input {
     margin-left: 20px;
