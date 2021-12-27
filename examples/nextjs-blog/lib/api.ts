@@ -1,5 +1,5 @@
 async function fetchGet(path: string) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_KONTENBASE_API_URL}/${path}`, {
+  const res = await fetch(`https://api.kontenbase.com/query/api/v1/${process.env.NEXT_PUBLIC_KONTENBASE_API_KEY}/${path}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
