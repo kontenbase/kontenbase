@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import AppBar from '../components/AppBar';
 import Head from 'next/head';
 import TodoType from '../types/Todo';
+import Loading from '../components/Loading';
 
 const SERVICE_NAME = 'todos';
 
@@ -18,6 +19,8 @@ const Home: NextPage = () => {
   const [value, setValue] = useState('');
   const [user, setUser] = useState<any>({});
   const [update, setUpdate] = useState<TodoType | null>();
+  const [loading, setLoading] = useState(true);
+
 
   const getData = () => {
     kontenbase
@@ -32,10 +35,11 @@ const Home: NextPage = () => {
     kontenbase.auth
       .profile()
       .then((res) => {
+        setLoading(false);
         setUser(res.data);
       })
       .catch((err) => {
-        router.replace('/login');
+        router.push('/login');
       });
   };
 
@@ -45,7 +49,7 @@ const Home: NextPage = () => {
       getProfile();
       getData();
     } else {
-      router.replace('/login');
+      router.push('/login');
     }
   }, []);
 
@@ -128,7 +132,9 @@ const Home: NextPage = () => {
     }
   };
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <>
       <Head>
         <title>Kontenbase - Todo</title>
@@ -141,6 +147,7 @@ const Home: NextPage = () => {
             className={formStyles.input}
             value={value}
             onChange={handleChangeValue}
+            placeholder='Add your new todo'
             autoFocus
           />
           <button className={formStyles.button} type="submit">
@@ -159,6 +166,7 @@ const Home: NextPage = () => {
                     name="name"
                     className={formStyles.input}
                     value={update.name}
+                    placeholder='Update todo'
                     onChange={(e) => {
                       console.log(e.target.value);
                       setUpdate({
@@ -168,8 +176,8 @@ const Home: NextPage = () => {
                     }}
                     autoFocus
                   />
-                  <button type="submit">
-                    <img className={styles.icon} alt="Save" src="/save.svg" />
+                  <button type="submit" className={styles.iconButton}>
+                    <img alt="Save" src="/save.svg" />
                   </button>
                 </form>
               </div>
@@ -191,18 +199,24 @@ const Home: NextPage = () => {
                   </span>
                 </div>
                 <div style={{ display: 'flex' }}>
-                  <img
-                    className={styles.icon}
+                  <button
                     onClick={() => setUpdate(item)}
-                    alt="Delete"
+                    className={styles.iconButton}
+                  >
+                  <img
+                    alt="Update"
                     src="/update.svg"
                   />
-                  <img
-                    className={styles.icon}
+                  </button>
+                  <button
                     onClick={() => handleDelete(item)}
+                    className={styles.iconButton}
+                  >
+                  <img
                     alt="Delete"
                     src="/delete.svg"
                   />
+                  </button>
                 </div>
               </div>
             ),

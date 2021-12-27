@@ -55,6 +55,7 @@ const Register: NextPage = () => {
             id="name"
             type="text"
             name="name"
+            placeholder="Name"
           />
         </div>
         <div className={styles.inputWrapper}>
@@ -66,6 +67,7 @@ const Register: NextPage = () => {
             id="email"
             type="email"
             name="email"
+            placeholder="Email"
             required
           />
         </div>
@@ -78,6 +80,7 @@ const Register: NextPage = () => {
             id="password"
             type="password"
             name="password"
+            placeholder="Password"
             required
           />
         </div>

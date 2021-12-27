@@ -81,7 +81,7 @@ export default function AppBar({ user, isPublic }: Props) {
             <Menu.Items className="menu-items">
               <div className="arrow" />
               <Menu.Item onClick={handleLogout}>
-                <div className="menu-item logout-button">
+                <button className="menu-item logout-button">
                   <svg
                     width="16"
                     height="17"
@@ -120,7 +120,7 @@ export default function AppBar({ user, isPublic }: Props) {
                     </g>
                   </svg>
                   Logout
-                </div>
+                </button>
               </Menu.Item>
             </Menu.Items>
           </Menu>

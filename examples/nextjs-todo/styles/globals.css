@@ -5,7 +5,8 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-button, input {
+button,
+input {
   font-family: 'Roboto', sans-serif;
 }
 
@@ -14,9 +15,8 @@ button, input {
 }
 
 :root {
-  --primary: #5D5FEF;
+  --primary: #5d5fef;
 }
-
 
 a {
   color: inherit;
@@ -24,7 +24,7 @@ a {
 
 nav {
   padding: 12px;
-  border-bottom: 1px solid #DDDDDD;
+  border-bottom: 1px solid #dddddd;
 }
 
 .container {
@@ -67,7 +67,7 @@ nav {
   position: absolute;
   background-color: white;
   right: 0;
-  border: 1px solid #D7DBDF;
+  border: 1px solid #d7dbdf;
   box-sizing: border-box;
   border-radius: 5px;
   cursor: pointer;
@@ -77,8 +77,8 @@ nav {
 }
 
 .arrow {
-  border-left: 1px solid #D7DBDF;
-  border-top: 1px solid #D7DBDF;
+  border-left: 1px solid #d7dbdf;
+  border-top: 1px solid #d7dbdf;
   height: 10px;
   width: 10px;
   background-color: white;
@@ -92,10 +92,15 @@ nav {
   display: flex;
   align-items: center;
   padding: 12px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
 }
 
 .logout-button {
-  color: #FF4450;
+  color: #ff4450;
 }
 
 .logout-button svg {
@@ -106,6 +111,25 @@ nav {
   height: 36px;
 }
 
+.loading {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.loading img {
+  animation: loading 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes loading {
+  to {
+    opacity: 0.2;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .logo {
     height: 26px;
@@ -114,7 +138,7 @@ nav {
   nav {
     padding: 8px;
   }
- 
+
   .container {
     padding: 0 20px;
   }

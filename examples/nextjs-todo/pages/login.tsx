@@ -43,6 +43,7 @@ const Login: NextPage = () => {
             id="email"
             type="email"
             name="email"
+            placeholder="Email"
             required
           />
         </div>
@@ -55,6 +56,7 @@ const Login: NextPage = () => {
             id="password"
             type="password"
             name="password"
+            placeholder="Password"
             required
           />
         </div>

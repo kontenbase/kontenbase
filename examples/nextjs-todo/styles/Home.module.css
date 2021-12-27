@@ -41,10 +41,15 @@
   cursor: pointer;
 }
 
-.icon {
-  height: 22px;
+.iconButton {
   cursor: pointer;
-  margin-left: 12px;
+  margin-left: 2px;
+  background-color: transparent;
+  border: none;
+}
+
+.iconButton img {
+  height: 22px;
 }
 
 .updateWrapper {
@@ -66,7 +71,7 @@
 }
 
 
-.updateWrapper img {
+.updateWrapper button {
   margin: auto 0 auto auto;
 }
 
