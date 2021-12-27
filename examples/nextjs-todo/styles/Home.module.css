@@ -1,18 +1,14 @@
-.container {
-  padding: 0 20px;
-  max-width: 700px;
-  margin: auto;
-}
 
 .addWrapper {
   display: grid;
-  grid-template-columns: 1fr 100px;
+  grid-template-columns: 1fr 70px;
   grid-gap: 8px;
   margin-bottom: 20px;
+  margin-top: 60px;
 }
 
 .item {
-  padding: 8px 12px;
+  padding: 8px 2px;
   border-bottom: 1px solid #eaeaea;
   margin-top: 12px;
   font-size: 20px;
@@ -38,4 +34,49 @@
   padding: 8px 12px;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.checkbox {
+  margin-right: 16px;
+  cursor: pointer;
+}
+
+.icon {
+  height: 22px;
+  cursor: pointer;
+  margin-left: 12px;
+}
+
+.updateWrapper {
+  display: grid;
+  grid-template-columns: 1fr 30px;
+  grid-gap: 8px;
+  width: 100%;
+}
+
+.updateWrapper input {
+  font-size: 20px;
+  padding: 0px;
+  border: none;
+  margin-top: -4px;
+}
+
+.updateWrapper input:focus {
+  outline: none;
+}
+
+
+.updateWrapper img {
+  margin: auto 0 auto auto;
+}
+
+.updateWrapper button {
+  background-color: transparent;
+  border: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .addWrapper {
+    margin-top: 20px;
+  }
 }
