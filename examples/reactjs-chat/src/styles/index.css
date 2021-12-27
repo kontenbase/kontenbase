@@ -1,15 +1,129 @@
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 input, button {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Roboto', sans-serif;
+}
+
+input::placeholder {
+  color: #B5B5B5;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+:root {
+  --primary: #38BF4B;
+}
+
+
+a {
+  color: inherit;
+}
+
+nav {
+  padding: 12px;
+  border-bottom: 1px solid #DDDDDD;
+  height: 40px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* AppBar style */
+.app-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avatar {
+  background-color: #38BF4B;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.avatar-button {
+  background-color: transparent;
+  border: none;
+}
+
+.menu-items {
+  position: absolute;
+  background-color: white;
+  right: 0;
+  border: 1px solid #D7DBDF;
+  box-sizing: border-box;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 10;
+  margin-top: 8px;
+  min-width: 140px;
+}
+
+.arrow {
+  border-left: 1px solid #D7DBDF;
+  border-top: 1px solid #D7DBDF;
+  height: 10px;
+  width: 10px;
+  background-color: white;
+  position: absolute;
+  transform: rotate(45deg);
+  top: -7px;
+  right: 12px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+}
+
+.logout-button {
+  color: #FF4450;
+}
+
+.logout-button svg {
+  margin-right: 6px;
+}
+
+.logo {
+  height: 36px;
+}
+
+@media only screen and (max-width: 600px) {
+  .logo {
+    height: 26px;
+  }
+
+  nav {
+    height: 34px;
+    padding: 12px;
+  }
+  
+}
+
+/* chat style */
+.rce-mbox {
+  padding: 12px 15px 14px 15px !important;
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import AppBar from '../../components/AppBar'
 import kontenbase from '../../lib/kontenbase'
 import '../../styles/form.css'
 
@@ -28,16 +29,17 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <>
+      <AppBar isPublic />
       <form onSubmit={handleSubmit} className='form-container'>
         <h1>Login Account</h1>
         <div className="input-wrapper">
           <label className="label" htmlFor="email">Email</label>
-          <input required className="input" id="email" type="email" name="email" />
+          <input placeholder='Email' required className="input" id="email" type="email" name="email" />
         </div>
         <div className="input-wrapper">
           <label className="label" htmlFor="password">Password</label>
-          <input required className="input" id="password" type="password" name="password" />
+          <input placeholder='Password' required className="input" id="password" type="password" name="password" />
         </div>
         <div className="button-wrapper">
           <button
@@ -52,7 +54,7 @@ const Login = () => {
           <p>Don't have an account? <Link to='/register'>Register</Link></p>
         </div>
       </form>
-    </div>
+    </>
   )
 }
 

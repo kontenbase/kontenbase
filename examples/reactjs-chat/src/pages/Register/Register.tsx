@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import AppBar from '../../components/AppBar'
 import kontenbase from '../../lib/kontenbase'
 import '../../styles/form.css'
 
@@ -17,10 +18,19 @@ const Register = () => {
     const email = target.email.value
     const password = target.password.value
     const name = target.name.value
+    let firstName = "";
+    let lastName = "";
+
+    const split = name.split(" ");
+    firstName = split[0];
+    if (split.length >= 2) {
+      split.shift();
+      lastName = split.join(" ");
+    }
 
     try {
       setIsLoading(true)
-      await kontenbase.auth.register({ email, password, firstName: name })
+      await kontenbase.auth.register({ email, password, firstName, lastName })
       setIsLoading(false)
       navigate('/')
     } catch (error: any) {
@@ -30,20 +40,21 @@ const Register = () => {
   }
 
   return (
-    <div>
+    <>
+      <AppBar isPublic />
       <form onSubmit={handleSubmit} className='form-container'>
         <h1>Create Account</h1>
         <div className="input-wrapper">
           <label className="label" htmlFor="name">Name</label>
-          <input required className="input" id="name" type="text" name="name" />
+          <input placeholder='Name' required className="input" id="name" type="text" name="name" />
         </div>
         <div className="input-wrapper">
           <label className="label" htmlFor="email">Email</label>
-          <input required className="input" id="email" type="email" name="email" />
+          <input placeholder='Email' required className="input" id="email" type="email" name="email" />
         </div>
         <div className="input-wrapper">
           <label className="label" htmlFor="password">Password</label>
-          <input required className="input" id="password" type="password" name="password" />
+          <input placeholder='Password' required className="input" id="password" type="password" name="password" />
         </div>
         <div className="button-wrapper">
           <button
@@ -58,7 +69,7 @@ const Register = () => {
           <p>Already have an account? <Link to='/login'>Login</Link></p>
         </div>
       </form>
-    </div>
+    </>
   )
 }
 

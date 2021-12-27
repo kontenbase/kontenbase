@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { MessageList } from 'react-chat-elements'
 import { useNavigate } from 'react-router-dom'
 
@@ -8,6 +8,7 @@ import 'react-chat-elements/dist/main.css'
 import './Chat.css'
 import ChatType from '../../types/Chat'
 import { Sort } from '@kontenbase/sdk'
+import AppBar from '../../components/AppBar'
 
 const SERVICE_NAME = 'chats'
 
@@ -78,9 +79,6 @@ const Chat = () => {
     kontenbase.service<ChatType>(SERVICE_NAME).create({
       text
     })
-      .then(res => {
-        getChats()
-      })
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -111,17 +109,11 @@ const Chat = () => {
 
   return (
     <>
-      <nav>
-        <div className='title'>Chat</div>
-        <button
-          className='logout'
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
-      </nav>
+      <AppBar
+        user={user}
+      />
       <div
-        className='chat-container'
+        className='container'
       >
         <MessageList
           className='chat-list'
@@ -139,7 +131,7 @@ const Chat = () => {
             type="submit"
             className='chat-button'
           >
-            Send
+            <img alt='Send' src='/send.svg' />
           </button>
         </form>
       </div>
