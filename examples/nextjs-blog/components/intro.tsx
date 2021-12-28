@@ -1,4 +1,4 @@
-import { CMS_NAME } from '../lib/constants'
+import { CMS_NAME } from '../lib/constants';
 
 const Intro = () => {
   return (
@@ -14,7 +14,7 @@ const Intro = () => {
         >
           Next.js
         </a>{' '}
-        and {' '}
+        and{' '}
         <a
           href="https://kontenbase.com/"
           className="underline hover:text-success duration-200 transition-colors"
@@ -24,7 +24,7 @@ const Intro = () => {
         .
       </h4>
     </section>
-  )
-}
+  );
+};
 
-export default Intro
+export default Intro;

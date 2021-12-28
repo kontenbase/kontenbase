@@ -1,37 +1,39 @@
 async function fetchGet(path: string) {
-  const res = await fetch(`https://api.kontenbase.com/query/api/v1/${process.env.NEXT_PUBLIC_KONTENBASE_API_KEY}/${path}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
+  const res = await fetch(
+    `https://api.kontenbase.com/query/api/v1/${process.env.NEXT_PUBLIC_KONTENBASE_API_KEY}/${path}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
-  })
+  );
 
-  const json = await res.json()
+  const json = await res.json();
   if (json.errors) {
-    console.error(json.errors)
-    throw new Error('Failed to fetch API')
+    console.error(json.errors);
+    throw new Error('Failed to fetch API');
   }
 
-  return json
+  return json;
 }
 
-
 export async function getPostBySlug(slug: string) {
-  const posts: any[] = await fetchGet(`blogs?slug=${slug}`)
+  const posts: any[] = await fetchGet(`blogs?slug=${slug}`);
 
   if (posts?.length > 0) {
-    return posts[0]
+    return posts[0];
   } else {
-    return {}
-  } 
+    return {};
+  }
 }
 
 export async function getAllPosts(fields: string[] = []) {
-  const posts: any[] = await fetchGet('blogs')
+  const posts: any[] = await fetchGet('blogs');
 
   if (posts) {
-    return posts
+    return posts;
   } else {
-    return []
-  } 
+    return [];
+  }
 }
