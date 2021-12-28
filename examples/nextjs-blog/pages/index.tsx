@@ -46,6 +46,6 @@ export const getStaticProps = async () => {
   const allPosts = await getAllPosts();
 
   return {
-    props: { allPosts: [...allPosts, ...allPosts] },
+    props: { allPosts },
   };
 };
