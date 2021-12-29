@@ -34,12 +34,48 @@ export enum Sort {
   DESC = -1,
 }
 
-export interface FindOption {
+export type Where<T> =
+  | Partial<T>
+  | {
+      [P in keyof Partial<T> | string]:
+        | {
+            ['$in']?: [string | number | boolean];
+          }
+        | {
+            ['$nin']?: [string | number | boolean];
+          }
+        | {
+            ['$ne']?: string | number | boolean;
+          }
+        | {
+            ['$contains']?: string | number | boolean;
+          }
+        | {
+            ['$notContains']?: string | number | boolean;
+          }
+        | {
+            ['$lt']?: number;
+          }
+        | {
+            ['$lte']?: number;
+          }
+        | {
+            ['$gt']?: number;
+          }
+        | {
+            ['$gte']?: number;
+          };
+    };
+
+export type FindOption<T> = {
   limit?: number;
   skip?: number;
-  where?: any;
-  sort?: { [key: string]: Sort };
-}
+  where?: Where<T>;
+  sort?: { [P in keyof Partial<T>]: Sort | number };
+  select?: [keyof Partial<T>];
+  lookup?: [keyof Partial<T>];
+  or?: [Where<T>];
+};
 
 export interface QueryClientOption {
   headers?: { [key: string]: string };

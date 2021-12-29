@@ -1,7 +1,7 @@
 import { KontenbaseClient } from '../src';
 
 const URL = process.env.URL || '';
-const API_KEY = process.env.API_KEY || '';
+const API_KEY = process.env.API_KEY || '123';
 const SERVICE_NAME = process.env.SERVICE_NAME || '';
 
 const kontenbase = new KontenbaseClient({
@@ -55,5 +55,137 @@ describe('Filter', () => {
     });
 
     expect(result).toBe('$sort[name]=1');
+  });
+
+  test('select', async () => {
+    const result = serviceProto._filter({
+      select: ['name'],
+    });
+
+    expect(result).toBe('$select[]=name');
+  });
+
+  test('lookup', async () => {
+    const result = serviceProto._filter({
+      lookup: ['name'],
+    });
+
+    expect(result).toBe('$lookup[]=name');
+  });
+
+  test('$ne', async () => {
+    const result = serviceProto._filter({
+      where: {
+        name: {
+          $ne: 'test',
+        },
+      },
+    });
+
+    expect(result).toBe('name[$ne]=test');
+  });
+
+  test('$contains', async () => {
+    const result = serviceProto._filter({
+      where: {
+        name: {
+          $contains: 'test',
+        },
+      },
+    });
+
+    expect(result).toBe('name[$contains]=test');
+  });
+
+  test('$notContains', async () => {
+    const result = serviceProto._filter({
+      where: {
+        name: {
+          $notContains: 'test',
+        },
+      },
+    });
+
+    expect(result).toBe('name[$notContains]=test');
+  });
+
+  test('$in', async () => {
+    const result = serviceProto._filter({
+      where: {
+        name: {
+          $in: ['test'],
+        },
+      },
+    });
+
+    expect(result).toBe('name[$in][]=test');
+  });
+
+  test('$nin', async () => {
+    const result = serviceProto._filter({
+      where: {
+        name: {
+          $nin: ['test'],
+        },
+      },
+    });
+
+    expect(result).toBe('name[$nin][]=test');
+  });
+
+  test('$lt', async () => {
+    const result = serviceProto._filter({
+      where: {
+        name: {
+          $lt: 1,
+        },
+      },
+    });
+
+    expect(result).toBe('name[$lt]=1');
+  });
+
+  test('$lte', async () => {
+    const result = serviceProto._filter({
+      where: {
+        name: {
+          $lte: 1,
+        },
+      },
+    });
+
+    expect(result).toBe('name[$lte]=1');
+  });
+
+  test('$gt', async () => {
+    const result = serviceProto._filter({
+      where: {
+        name: {
+          $gt: 1,
+        },
+      },
+    });
+
+    expect(result).toBe('name[$gt]=1');
+  });
+
+  test('$gte', async () => {
+    const result = serviceProto._filter({
+      where: {
+        name: {
+          $gte: 1,
+        },
+      },
+    });
+
+    expect(result).toBe('name[$gte]=1');
+  });
+
+  test('$or', async () => {
+    const result = serviceProto._filter({
+      or: [{ name: 'test' }],
+    });
+
+    expect(result).toBe('$or[][name]=test');
   });
 });

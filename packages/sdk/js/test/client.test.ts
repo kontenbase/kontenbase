@@ -1,4 +1,4 @@
-import { KontenbaseClient, createClient, Sort } from '../src';
+import { KontenbaseClient, createClient } from '../src';
 
 const URL = process.env.URL || '';
 const API_KEY = process.env.API_KEY || '';

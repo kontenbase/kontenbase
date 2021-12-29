@@ -91,6 +91,83 @@ const { data } = await kontenbase.service('New Service').deleteById("605a251d7b8
 const { data } = await kontenbase.service('New Service').find()
 ```
 
+```js
+// sort
+// 1 = ascending
+// -1 = descending
+const { data } = await kontenbase.service('New Service').find({ sort: { name: 1 } })
+```
+
+```js
+// skip
+const { data } = await kontenbase.service('New Service').find({ skip: 10 })
+```
+
+```js
+// limit
+const { data } = await kontenbase.service('New Service').find({ limit: 10 })
+```
+
+```js
+// select
+const { data } = await kontenbase.service('New Service').find({ select: ['name'] })
+```
+
+```js
+// lookup field link to record
+const { data } = await kontenbase.service('New Service').find({ lookup: ['categories'] })
+```
+
+```js
+// where
+const { data } = await kontenbase.service('New Service').find({ where: { name: 'John'} })
+```
+
+```js
+// not equel
+const { data } = await kontenbase.service('New Service').find({ where: { name: { $ne: 'John' } } })
+```
+
+```js
+// contains
+const { data } = await kontenbase.service('New Service').find({ where: { name: { $contains: 'John' } } })
+```
+
+```js
+// not containts
+const { data } = await kontenbase.service('New Service').find({ where: { name: { $notContains: 'John' } } })
+```
+
+```js
+// include
+const { data } = await kontenbase.service('New Service').find({ where: { name: { $in: ['John'] } } })
+```
+
+```js
+// not include
+const { data } = await kontenbase.service('New Service').find({ where: { name: { $nin: ['John'] } } })
+```
+
+```js
+// less then
+const { data } = await kontenbase.service('New Service').find({ where: { total: { $lt: 10 } } })
+```
+
+```js
+// less then equal
+const { data } = await kontenbase.service('New Service').find({ where: { total: { $lte: 10 } } })
+```
+
+```js
+// greater then
+const { data } = await kontenbase.service('New Service').find({ where: { total: { $gt: 10 } } })
+```
+
+```js
+// greater then equal
+const { data } = await kontenbase.service('New Service').find({ where: { total: { $gte: 10 } } })
+```
+
 ## Storage
 ### Upload
 ```js
