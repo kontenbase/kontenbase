@@ -1,10 +1,34 @@
-# Chat example
+<p align="center">
+<img width="300" src="https://user-images.githubusercontent.com/2161622/147641752-a059d073-3acc-472f-844e-f9d4553e4c50.png">
+</p>
+<h3 align="center">Kontenbase Chat Example</h3>
+<p align="center">Simple Chat App example with React Js as Front-end, and <a href="https://kontenbase.com" target="_blank">Kontenbase</a> as Back-end</p>
+<br/>
 
-## Demo
+## Live Demo
 [https://kontenbase-chat.vercel.app](https://kontenbase-chat.vercel.app)
-## Getting Started
 
-First, run the development server:
+![image](https://user-images.githubusercontent.com/2161622/147642073-ccd343ad-4629-443f-af83-ec09a58fd4e2.png)
+
+## Getting Started
+Make sure you already installed latest node js on your pc
+
+### Kontenbase Back-end Setup
+
+1. Create Account/Login to your Kontenbase app at www.kontenbase.com. 
+2. Create service named "chats" as private service
+![image](https://user-images.githubusercontent.com/2161622/147642458-09eb7203-1757-4d7c-b63c-f94abdd095e5.png)
+3. Customize "chats" by adding some fields below:
+- text => Single Line Text
+- createdBy => Created By
+- createdAt => Created At
+![image](https://user-images.githubusercontent.com/2161622/147642635-699a13d3-a65f-44ad-a37b-49d46c0ec723.png)
+4. Copy the api key from the setting menu
+![image](https://user-images.githubusercontent.com/2161622/147642777-033fbb72-b6eb-40d9-8fff-407eda0b69f3.png)
+
+
+### Front-end Setup
+Run the Front-end development server:
 1. Install the dependencies with:
   ```
   npm install
@@ -15,8 +39,6 @@ First, run the development server:
 ```
 npm run start
 ```
-
-
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Deploy your own
