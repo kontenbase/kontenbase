@@ -62,7 +62,7 @@ describe('Filter', () => {
       select: ['name'],
     });
 
-    expect(result).toBe('$select[0]=name');
+    expect(result).toBe('$select[]=name');
   });
 
   test('lookup', async () => {
@@ -70,7 +70,7 @@ describe('Filter', () => {
       lookup: ['name'],
     });
 
-    expect(result).toBe('$lookup[0]=name');
+    expect(result).toBe('$lookup[]=name');
   });
 
   test('$ne', async () => {
@@ -118,7 +118,7 @@ describe('Filter', () => {
       },
     });
 
-    expect(result).toBe('name[$in][0]=test');
+    expect(result).toBe('name[$in][]=test');
   });
 
   test('$nin', async () => {
@@ -130,7 +130,7 @@ describe('Filter', () => {
       },
     });
 
-    expect(result).toBe('name[$nin][0]=test');
+    expect(result).toBe('name[$nin][]=test');
   });
 
   test('$lt', async () => {
@@ -186,6 +186,6 @@ describe('Filter', () => {
       or: [{ name: 'test' }],
     });
 
-    expect(result).toBe('$or[0][name]=test');
+    expect(result).toBe('$or[][name]=test');
   });
 });

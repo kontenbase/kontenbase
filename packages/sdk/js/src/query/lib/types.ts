@@ -67,7 +67,7 @@ export type Where<T> =
           };
     };
 
-export interface FindOption<T> {
+export type FindOption<T> = {
   limit?: number;
   skip?: number;
   where?: Where<T>;
@@ -75,7 +75,7 @@ export interface FindOption<T> {
   select?: [keyof Partial<T>];
   lookup?: [keyof Partial<T>];
   or?: [Where<T>];
-}
+};
 
 export interface QueryClientOption {
   headers?: { [key: string]: string };

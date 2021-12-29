@@ -76,7 +76,7 @@ export default class QueryClient<T> {
         };
       }
 
-      query = qs.stringify(filter, { encode: false });
+      query = qs.stringify(filter, { encode: false, arrayFormat: 'brackets' });
     }
     return query;
   }
