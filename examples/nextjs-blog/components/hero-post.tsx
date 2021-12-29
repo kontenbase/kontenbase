@@ -37,7 +37,7 @@ const HeroPost = ({
             <DateFormatter dateString={date} />
           </div>
           <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
-          <Avatar name={author?.firstName} picture={author?.picture} />
+          <Avatar name={`${author?.firstName || ''} ${author?.lastName || ''}`} picture={author?.picture} />
         </div>
       </div>
     </section>
