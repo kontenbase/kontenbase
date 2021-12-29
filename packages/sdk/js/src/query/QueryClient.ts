@@ -36,7 +36,7 @@ export default class QueryClient<T> {
     };
   }
 
-  private _filter(find?: FindOption): string {
+  private _filter(find?: FindOption<T>): string {
     let query = '';
     if (find) {
       let filter: any = {};
@@ -54,6 +54,21 @@ export default class QueryClient<T> {
         delete find.sort;
       }
 
+      if (find.select) {
+        filter['$select'] = find.select;
+        delete find.select;
+      }
+
+      if (find.lookup) {
+        filter['$lookup'] = find.lookup;
+        delete find.lookup;
+      }
+
+      if (find.or) {
+        filter['$or'] = find.or;
+        delete find.or;
+      }
+
       if (find.where) {
         filter = {
           ...filter,
@@ -66,7 +81,7 @@ export default class QueryClient<T> {
     return query;
   }
 
-  async find(find?: FindOption): Promise<KontenbaseResponse<T>> {
+  async find(find?: FindOption<T>): Promise<KontenbaseResponse<T>> {
     return new Promise(async (resove, reject) => {
       try {
         const query = this._filter(find);
