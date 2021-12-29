@@ -20,6 +20,7 @@ Make sure you already installed latest node js on your pc
 2. Create service named "chats" as private service
 <img width="300" src="https://user-images.githubusercontent.com/2161622/147642458-09eb7203-1757-4d7c-b63c-f94abdd095e5.png">
 3. Customize "chats" by adding some fields below:
+
 - text => Single Line Text
 - createdBy => Created By
 - createdAt => Created At
