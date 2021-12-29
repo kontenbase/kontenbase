@@ -8,7 +8,8 @@
 ## Live Demo
 [https://kontenbase-chat.vercel.app](https://kontenbase-chat.vercel.app)
 
-![image](https://user-images.githubusercontent.com/2161622/147642073-ccd343ad-4629-443f-af83-ec09a58fd4e2.png)
+<img width="800" src="https://user-images.githubusercontent.com/2161622/147642073-ccd343ad-4629-443f-af83-ec09a58fd4e2.png">
+
 
 ## Getting Started
 Make sure you already installed latest node js on your pc
@@ -17,14 +18,14 @@ Make sure you already installed latest node js on your pc
 
 1. Create Account/Login to your Kontenbase app at www.kontenbase.com. 
 2. Create service named "chats" as private service
-![image](https://user-images.githubusercontent.com/2161622/147642458-09eb7203-1757-4d7c-b63c-f94abdd095e5.png)
+<img width="300" src="https://user-images.githubusercontent.com/2161622/147642458-09eb7203-1757-4d7c-b63c-f94abdd095e5.png">
 3. Customize "chats" by adding some fields below:
 - text => Single Line Text
 - createdBy => Created By
 - createdAt => Created At
-![image](https://user-images.githubusercontent.com/2161622/147642635-699a13d3-a65f-44ad-a37b-49d46c0ec723.png)
+<img width="300" src="https://user-images.githubusercontent.com/2161622/147642635-699a13d3-a65f-44ad-a37b-49d46c0ec723.png">
 4. Copy the api key from the setting menu
-![image](https://user-images.githubusercontent.com/2161622/147642777-033fbb72-b6eb-40d9-8fff-407eda0b69f3.png)
+<img width="300" src="https://user-images.githubusercontent.com/2161622/147642777-033fbb72-b6eb-40d9-8fff-407eda0b69f3.png">
 
 
 ### Front-end Setup
