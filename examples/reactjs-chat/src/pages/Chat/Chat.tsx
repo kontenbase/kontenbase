@@ -89,11 +89,6 @@ const Chat = () => {
     }
   }
 
-  const handleLogout = () => {
-    kontenbase.auth.logout()
-    navigate('/login')
-  }
-
   const dataSource = useMemo(() => {
     return chats?.map(item => {
       const isCreated = item.createdBy?.email === user.email
@@ -120,7 +115,8 @@ const Chat = () => {
           lockable={true}
           dataSource={dataSource}
         />
-        <form onSubmit={handleSubmit} className='chat-input-wrapper'>
+      </div>
+      <form onSubmit={handleSubmit} className='chat-input-wrapper'>
           <input
             placeholder="Type here..."
             ref={inputRef}
@@ -134,7 +130,6 @@ const Chat = () => {
             <img alt='Send' src='/send.svg' />
           </button>
         </form>
-      </div>
     </>
 
   )
