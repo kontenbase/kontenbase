@@ -4,7 +4,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "format": "prettier --write \"**/*.{ts,tsx}\""
   },
   "dependencies": {
     "classnames": "2.3.1",
@@ -24,6 +25,7 @@
     "@types/react-dom": "^17.0.5",
     "autoprefixer": "^10.2.5",
     "postcss": "^8.3.0",
+    "prettier": "^2.5.1",
     "tailwindcss": "^2.1.2"
   }
 }

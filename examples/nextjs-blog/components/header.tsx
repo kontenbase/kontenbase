@@ -1,14 +1,23 @@
-import Link from 'next/link'
+import Link from 'next/link';
+import Container from './container';
 
 const Header = () => {
   return (
-    <h2 className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 mt-8">
-      <Link href="/">
-        <a className="hover:underline">Blog</a>
-      </Link>
-      .
-    </h2>
-  )
-}
+    <nav className="mb-6 sm:mb-20 pb-4 pt-3 border-b border-gray-200 sticky top-0 bg-white">
+      <Container>
+        <Link href="/">
+          <img
+            className="h-8 cursor-pointer sm:h-10"
+            alt="Logo"
+            src="/logo.svg"
+            style={{
+              marginLeft: -4
+            }}
+          />
+        </Link>
+      </Container>
+    </nav>
+  );
+};
 
-export default Header
+export default Header;

@@ -1,6 +1,7 @@
 type Author = {
-  firstName: string
-  picture: string
-}
+  firstName: string;
+  lastName: string;
+  picture: string;
+};
 
-export default Author
+export default Author;
