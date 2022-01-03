@@ -2,7 +2,8 @@ import { KontenbaseClient, createClient } from '../src';
 
 const URL = process.env.URL || '';
 const API_KEY = process.env.API_KEY || '';
-const SERVICE_NAME = process.env.SERVICE_NAME || '';
+const SERVICE_NAME = process.env.SERVICE_NAME || 'todos';
+const SECOND_SERVICE_NAME = process.env.SECOND_SERVICE_NAME || 'categories';
 const EMAIL = process.env.EMAIL || '';
 const PASSWORD = process.env.PASSWORD || '';
 const kontenbase = new KontenbaseClient({
@@ -10,9 +11,10 @@ const kontenbase = new KontenbaseClient({
   apiKey: API_KEY,
 });
 
-interface Model {
+interface Todo {
   _id: string;
   name: string;
+  categories: [string];
 }
 
 test('it should create the client connection', async () => {
@@ -27,6 +29,8 @@ test('it should throw an error if no valid params are provided', async () => {
 
 describe('Client', () => {
   let id: string;
+  let secondId: string;
+
   const login = () => {
     return kontenbase.auth.login({
       email: EMAIL,
@@ -56,29 +60,60 @@ describe('Client', () => {
 
   test('create', async () => {
     const response = await kontenbase
-      .service<Model>(SERVICE_NAME)
+      .service<Todo>(SERVICE_NAME)
       .create({ name: 'Hello' });
     id = response.data?._id || '';
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(201);
+  });
+
+  test('second create', async () => {
+    const response = await kontenbase
+      .service<Todo>(SECOND_SERVICE_NAME)
+      .create({ name: 'Yes' });
+    secondId = response.data?._id || '';
+    expect(response.status).toBe(201);
   });
 
   test('find', async () => {
-    const response = await kontenbase.service<Model>(SERVICE_NAME).find();
+    const response = await kontenbase.service<Todo>(SERVICE_NAME).find();
 
     expect(response.status).toBe(200);
   });
 
   test('updateById', async () => {
     const response = await kontenbase
-      .service<Model>(SERVICE_NAME)
+      .service<Todo>(SERVICE_NAME)
       .updateById(id, { name: 'Updated' });
+    expect(response.status).toBe(200);
+  });
+
+  test('link', async () => {
+    const response = await kontenbase
+      .service<Todo>(SERVICE_NAME)
+      .link(id, { [SECOND_SERVICE_NAME]: secondId });
+
+    expect(response.status).toBe(200);
+  });
+
+  test('unlink', async () => {
+    const response = await kontenbase
+      .service<Todo>(SERVICE_NAME)
+      .unlink(id, { [SECOND_SERVICE_NAME]: secondId });
+
     expect(response.status).toBe(200);
   });
 
   test('deleteById', async () => {
     const response = await kontenbase
-      .service<Model>(SERVICE_NAME)
+      .service<Todo>(SERVICE_NAME)
       .deleteById(id);
+    expect(response.status).toBe(200);
+  });
+
+  test('second deleteById', async () => {
+    const response = await kontenbase
+      .service<Todo>(SECOND_SERVICE_NAME)
+      .deleteById(secondId);
     expect(response.status).toBe(200);
   });
 });
