@@ -86,6 +86,20 @@ const { data } = await kontenbase.service('New Service').updateById("605a251d7b8
 const { data } = await kontenbase.service('New Service').deleteById("605a251d7b8678bf6811k3b1")
 ```
 
+### Link
+```js
+const { data } = await kontenbase.service('New Service').link("605a251d7b8678bf6811k3b1", {
+  categories: '61d26e8e2adb12b85c33029c',
+})
+```
+
+### Unlink
+```js
+const { data } = await kontenbase.service('New Service').unlink("605a251d7b8678bf6811k3b1", {
+  categories: '61d26e8e2adb12b85c33029c',
+})
+```
+
 ### Find
 ```js
 const { data } = await kontenbase.service('New Service').find()

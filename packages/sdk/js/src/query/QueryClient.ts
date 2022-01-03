@@ -194,4 +194,52 @@ export default class QueryClient<T> {
       }
     });
   }
+
+  async link(
+    id: string,
+    body: { [key: string]: string },
+  ): Promise<KontenbaseSingleResponse<T>> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { data, status, statusText } = await axios.request<T>({
+          method: 'LINK',
+          url: `${this.url}/${id}`,
+          headers: this.headers,
+          data: body,
+        });
+
+        resolve({
+          data,
+          status,
+          statusText,
+        });
+      } catch (error) {
+        reject(this._error(error));
+      }
+    });
+  }
+
+  async unlink(
+    id: string,
+    body: { [key: string]: string },
+  ): Promise<KontenbaseSingleResponse<T>> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { data, status, statusText } = await axios.request<T>({
+          method: 'UNLINK',
+          url: `${this.url}/${id}`,
+          headers: this.headers,
+          data: body,
+        });
+
+        resolve({
+          data,
+          status,
+          statusText,
+        });
+      } catch (error) {
+        reject(this._error(error));
+      }
+    });
+  }
 }
