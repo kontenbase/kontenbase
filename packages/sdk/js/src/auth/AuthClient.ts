@@ -5,6 +5,8 @@ import {
   AuthResponseFailure,
   AuthResponse,
   ProfileResponse,
+  LogoutResponse,
+  Logout,
 } from './lib/types';
 
 export default class AuthClient {
@@ -103,6 +105,27 @@ export default class AuthClient {
     });
   }
 
+  async updateProfile<T = any>(body: Partial<T>): Promise<ProfileResponse<T>> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { data, status, statusText } = await axios.patch<T>(
+          `${this.url}/profile`,
+          body,
+          {
+            headers: this._headers(),
+          },
+        );
+        resolve({
+          data,
+          status,
+          statusText,
+        });
+      } catch (error) {
+        reject(this._error(error));
+      }
+    });
+  }
+
   token() {
     return this.currentToken;
   }
@@ -121,9 +144,29 @@ export default class AuthClient {
     this._setToken(token);
   }
 
-  logout() {
-    this.currentToken = null;
-    this._removeToken();
+  async logout(): Promise<LogoutResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { data, status, statusText } = await axios.post<Logout>(
+          `${this.url}/logout`,
+          null,
+          {
+            headers: this._headers(),
+          },
+        );
+
+        this.currentToken = null;
+        this._removeToken();
+
+        resolve({
+          data,
+          status,
+          statusText,
+        });
+      } catch (error) {
+        reject(this._error(error));
+      }
+    });
   }
 
   private _setToken(token: string) {
