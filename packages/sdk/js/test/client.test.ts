@@ -58,6 +58,14 @@ describe('Client', () => {
     expect(response.status).toBe(200);
   });
 
+  test('updateProfile', async () => {
+    const response = await kontenbase.auth.updateProfile({
+      firstName: 'Tester',
+    });
+
+    expect(response.status).toBe(200);
+  });
+
   test('create', async () => {
     const response = await kontenbase
       .service<Todo>(SERVICE_NAME)
@@ -114,6 +122,11 @@ describe('Client', () => {
     const response = await kontenbase
       .service<Todo>(SECOND_SERVICE_NAME)
       .deleteById(secondId);
+    expect(response.status).toBe(200);
+  });
+
+  test('logout', async () => {
+    const response = await kontenbase.auth.logout();
     expect(response.status).toBe(200);
   });
 });

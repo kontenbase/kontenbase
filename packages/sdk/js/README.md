@@ -59,6 +59,18 @@ const { data } = await kontenbase.auth.login({
 const { data } = await kontenbase.auth.profile()
 ```
 
+### Update Profile
+
+```js
+const { data } = await kontenbase.auth.updateProfile({ firstName: "John" })
+```
+
+### Logout
+
+```js
+const { data } = await kontenbase.auth.logout()
+```
+
 ## Database 
 
 ### Create

@@ -27,3 +27,13 @@ export interface ProfileResponseSuccess<T> extends AuthResponseBase {
 export type ProfileResponse<T> =
   | ProfileResponseSuccess<T>
   | AuthResponseFailure;
+
+export interface Logout {
+  message: string;
+}
+export interface LogoutResponseSuccess extends AuthResponseBase {
+  data?: Logout;
+  error?: null;
+}
+
+export type LogoutResponse = LogoutResponseSuccess | AuthResponseFailure;
