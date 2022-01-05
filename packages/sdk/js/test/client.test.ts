@@ -1,4 +1,6 @@
 import { KontenbaseClient, createClient } from '../src';
+import fs from 'fs';
+import path from 'path';
 
 const URL = process.env.URL || '';
 const API_KEY = process.env.API_KEY || '';
@@ -122,6 +124,13 @@ describe('Client', () => {
     const response = await kontenbase
       .service<Todo>(SECOND_SERVICE_NAME)
       .deleteById(secondId);
+    expect(response.status).toBe(200);
+  });
+
+  test('upload', async () => {
+    const filePath = path.join(__dirname, 'icon.png');
+    const file = fs.createReadStream(filePath);
+    const response = await kontenbase.storage.upload(file);
     expect(response.status).toBe(200);
   });
 
