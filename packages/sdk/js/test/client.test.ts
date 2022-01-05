@@ -90,6 +90,11 @@ describe('Client', () => {
     expect(response.status).toBe(200);
   });
 
+  test('getById', async () => {
+    const response = await kontenbase.service<Todo>(SERVICE_NAME).getById(id);
+    expect(response.status).toBe(200);
+  });
+
   test('updateById', async () => {
     const response = await kontenbase
       .service<Todo>(SERVICE_NAME)
