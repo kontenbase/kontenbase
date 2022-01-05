@@ -106,7 +106,7 @@ export default class QueryClient<T> {
     });
   }
 
-  async findById(id: string): Promise<KontenbaseSingleResponse<T>> {
+  async getById(id: string): Promise<KontenbaseSingleResponse<T>> {
     return new Promise(async (resolve, reject) => {
       try {
         const { data, status, statusText } = await axios.get<T>(
