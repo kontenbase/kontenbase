@@ -150,7 +150,7 @@ const { data } = await kontenbase.service('New Service').find({ where: { name: '
 ```
 
 ```js
-// not equel
+// not equal
 const { data } = await kontenbase.service('New Service').find({ where: { name: { $ne: 'John' } } })
 ```
 
@@ -202,18 +202,23 @@ const { data } = await kontenbase.storage.upload(file)
 ```
 
 ## Realtime
+### Event
+- `*`
+- `CREATE_RECORD`
+- `UPDATE_RECORD`
+- `DELETE_RECORD`
 ### Subscribe
 ```js
-kontenbase.realtime.subscribe('New Service', (message) => {
+kontenbase.realtime.subscribe('New Service', { event: "*" }, (message) => {
   console.log(message)
 })
 ```
 
 ### Unsubscribe
 ```js
-const key = await kontenbase.realtime.subscribe('New Service', (message) => {
+const key = await kontenbase.realtime.subscribe('New Service', { event: "*" } , (message) => {
   console.log(message)
 })
 
-kontenabase.unsubscribe(key)
+kontenbase.realtime.unsubscribe(key)
 ```

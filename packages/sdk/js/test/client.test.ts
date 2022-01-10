@@ -139,6 +139,20 @@ describe('Client', () => {
     expect(response.status).toBe(200);
   });
 
+  test('subscribe', async () => {
+    const key = await kontenbase.realtime.subscribe<Todo>(
+      SERVICE_NAME,
+      { event: '*', where: { name: 'tes' } },
+      (message) => {
+        console.log(message);
+      },
+    );
+
+    const unsubscribe = kontenbase.realtime.unsubscribe(key);
+
+    expect(unsubscribe).toBe(true);
+  });
+
   test('logout', async () => {
     const response = await kontenbase.auth.logout();
     expect(response.status).toBe(200);
