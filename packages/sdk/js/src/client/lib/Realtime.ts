@@ -1,5 +1,9 @@
 import { AuthClient } from '../../auth';
-import { RealtimeClient, RealtimeCallback } from '../../realtime';
+import {
+  RealtimeClient,
+  RealtimeCallback,
+  SubscribeOption,
+} from '../../realtime';
 
 export default class Realtime {
   private _realtime: RealtimeClient;
@@ -10,10 +14,16 @@ export default class Realtime {
     this._auth = auth;
   }
 
-  subscribe(name: string, callback: RealtimeCallback) {
-    return this._realtime.subscribe(
+  subscribe<T>(
+    name: string,
+    option: SubscribeOption<T>,
+    callback: RealtimeCallback,
+  ): Promise<string> {
+    return this._realtime.subscribe<T>(
+      name,
       {
-        name: name,
+        where: option?.where,
+        event: option?.event,
         token: this._auth.token(),
       },
       callback,

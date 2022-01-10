@@ -21,3 +21,9 @@ export interface RealtimeMessage {
 }
 
 export type RealtimeCallback = (m: RealtimeMessage) => any;
+
+export type SubscribeOption<T> = {
+  event: RealtimeEventTypes;
+  where?: Partial<T>;
+  token?: string | null;
+};

@@ -150,7 +150,7 @@ const { data } = await kontenbase.service('New Service').find({ where: { name: '
 ```
 
 ```js
-// not equel
+// not equal
 const { data } = await kontenbase.service('New Service').find({ where: { name: { $ne: 'John' } } })
 ```
 
@@ -211,9 +211,9 @@ kontenbase.realtime.subscribe('New Service', (message) => {
 
 ### Unsubscribe
 ```js
-const key = await kontenbase.realtime.subscribe('New Service', (message) => {
+const key = await kontenbase.realtime.subscribe('New Service', { event: "*" } , (message) => {
   console.log(message)
 })
 
-kontenabase.unsubscribe(key)
+kontenbase.realtime.unsubscribe(key)
 ```

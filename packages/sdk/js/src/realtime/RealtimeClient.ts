@@ -1,8 +1,9 @@
 import axios from 'axios';
+import qs from 'qs';
 import {
   RealtimeClientOption,
-  RealtimeEventTypes,
   RealtimeCallback,
+  SubscribeOption,
 } from './lib/types';
 
 const Centrifuge = require('centrifuge');
@@ -17,7 +18,7 @@ export default class RealtimeClient {
     this.option = option;
   }
 
-  _centrifuge(token: string | null) {
+  _centrifuge(token: string | null | undefined) {
     const url = `${this.option.url.replace('http', 'ws')}/connection/${
       this.option.apiKey
     }/websocket${token ? `?token=${token}` : ''}`;
@@ -26,18 +27,11 @@ export default class RealtimeClient {
     });
   }
 
-  subscribe(
-    {
-      name,
-      token,
-      event,
-    }: {
-      name: string;
-      token: string | null;
-      event?: RealtimeEventTypes;
-    },
+  subscribe<T>(
+    name: string,
+    { token, event, where }: SubscribeOption<T>,
     callback: RealtimeCallback,
-  ) {
+  ): Promise<string> {
     return new Promise<string>(async (resolve, reject) => {
       try {
         let key = `${name.toLowerCase().replace(' ', '-')}-${String(
@@ -53,7 +47,16 @@ export default class RealtimeClient {
         const getChannel = await axios.get(
           `${this.option.url}/channel/${this.option.apiKey}/${name}`,
         );
-        const channel = getChannel.data.name;
+
+        let filter = '';
+
+        if (where) {
+          filter =
+            ':' +
+            qs.stringify(where, { encode: false, arrayFormat: 'brackets' });
+        }
+
+        const channel = `${getChannel.data.name}:${event || '*'}${filter}`;
         const centrifuge = this._centrifuge(token);
 
         const subscribe = centrifuge.subscribe(
@@ -81,7 +84,6 @@ export default class RealtimeClient {
 
         resolve(key);
       } catch (error) {
-        console.log(error);
         reject(error);
       }
     });
