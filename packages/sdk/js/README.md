@@ -202,9 +202,14 @@ const { data } = await kontenbase.storage.upload(file)
 ```
 
 ## Realtime
+### Event
+- `*`
+- `CREATE_RECORD`
+- `UPDATE_RECORD`
+- `DELETE_RECORD`
 ### Subscribe
 ```js
-kontenbase.realtime.subscribe('New Service', (message) => {
+kontenbase.realtime.subscribe('New Service', { event: "*" }, (message) => {
   console.log(message)
 })
 ```
