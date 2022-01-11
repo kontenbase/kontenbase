@@ -5,8 +5,7 @@ import {
   AuthResponseFailure,
   AuthResponse,
   ProfileResponse,
-  LogoutResponse,
-  Logout,
+  TokenResponse,
 } from './lib/types';
 
 export default class AuthClient {
@@ -50,13 +49,15 @@ export default class AuthClient {
   }): Promise<AuthResponse<T>> {
     return new Promise(async (resolve, reject) => {
       try {
-        const { data, status, statusText } = await axios.post(
+        const { data, status, statusText } = await axios.post<TokenResponse<T>>(
           `${this.url}/auth/login`,
           body,
         );
         this.saveToken(data.token);
+
+        const user = data.user;
         resolve({
-          data,
+          user,
           status,
           statusText,
         });
@@ -69,13 +70,15 @@ export default class AuthClient {
   async register<T = any>(body: Partial<T>): Promise<AuthResponse<T>> {
     return new Promise(async (resolve, reject) => {
       try {
-        const { data, status, statusText } = await axios.post(
+        const { data, status, statusText } = await axios.post<TokenResponse<T>>(
           `${this.url}/auth/register`,
           body,
         );
         this.saveToken(data.token);
+
+        const user = data.user;
         resolve({
-          data,
+          user,
           status,
           statusText,
         });
@@ -94,8 +97,10 @@ export default class AuthClient {
             headers: this._headers(),
           },
         );
+
+        const user = data;
         resolve({
-          data,
+          user,
           status,
           statusText,
         });
@@ -115,8 +120,10 @@ export default class AuthClient {
             headers: this._headers(),
           },
         );
+
+        const user = data;
         resolve({
-          data,
+          user,
           status,
           statusText,
         });
@@ -144,10 +151,10 @@ export default class AuthClient {
     this._setToken(token);
   }
 
-  async logout(): Promise<LogoutResponse> {
+  async logout<T = any>(): Promise<AuthResponse<T>> {
     return new Promise(async (resolve, reject) => {
       try {
-        const { data, status, statusText } = await axios.post<Logout>(
+        const { data, status, statusText } = await axios.post<TokenResponse<T>>(
           `${this.url}/auth/logout`,
           null,
           {
@@ -157,9 +164,9 @@ export default class AuthClient {
 
         this.currentToken = null;
         this._removeToken();
-
+        const user = data.user;
         resolve({
-          data,
+          user,
           status,
           statusText,
         });

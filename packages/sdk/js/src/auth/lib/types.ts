@@ -5,35 +5,26 @@ interface AuthResponseBase {
 
 export interface AuthResponseFailure extends AuthResponseBase {
   message?: string;
-  data?: null;
+  user?: null;
 }
 
 export interface AuthResponseSuccess<T> extends AuthResponseBase {
-  data?: Session;
   error?: null;
+  user: T;
 }
 
 export type AuthResponse<T> = AuthResponseSuccess<T> | AuthResponseFailure;
 
-export interface Session {
+export interface TokenResponse<T> {
   token: string;
+  user: T;
 }
 
 export interface ProfileResponseSuccess<T> extends AuthResponseBase {
-  data?: T;
   error?: null;
+  user?: T;
 }
 
 export type ProfileResponse<T> =
   | ProfileResponseSuccess<T>
   | AuthResponseFailure;
-
-export interface Logout {
-  message: string;
-}
-export interface LogoutResponseSuccess extends AuthResponseBase {
-  data?: Logout;
-  error?: null;
-}
-
-export type LogoutResponse = LogoutResponseSuccess | AuthResponseFailure;
