@@ -36,7 +36,7 @@ Use kontenbase auth services for manage your user.
 ### Register
 
 ```js
-const { user } = await kontenbase.auth.register({
+const { user, token } = await kontenbase.auth.register({
   firstName: 'John',
   lastName: 'Doe',
   email: 'user@gmail.com',
@@ -47,7 +47,7 @@ const { user } = await kontenbase.auth.register({
 ### Login
 
 ```js
-const { user } = await kontenbase.auth.login({
+const { user, token } = await kontenbase.auth.login({
   email: 'user@gmail.com',
   password: 'password',
 })
@@ -62,7 +62,7 @@ const { user } = await kontenbase.auth.user()
 ### Update
 
 ```js
-const { user } = await kontenbase.auth.update({ firstName: "John" })
+const { user, token } = await kontenbase.auth.update({ firstName: "John" })
 ```
 
 ### Logout

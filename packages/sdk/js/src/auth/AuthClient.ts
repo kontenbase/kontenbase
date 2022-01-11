@@ -60,6 +60,7 @@ export default class AuthClient {
           user,
           status,
           statusText,
+          token: data.token,
         });
       } catch (error) {
         reject(this._error(error));
@@ -81,6 +82,7 @@ export default class AuthClient {
           user,
           status,
           statusText,
+          token: data.token,
         });
       } catch (error) {
         reject(this._error(error));
@@ -162,13 +164,13 @@ export default class AuthClient {
           },
         );
 
-        this.currentToken = null;
         this._removeToken();
         const user = data.user;
         resolve({
           user,
           status,
           statusText,
+          token: data.token,
         });
       } catch (error) {
         reject(this._error(error));
@@ -183,6 +185,7 @@ export default class AuthClient {
   }
 
   private _removeToken() {
+    this.currentToken = null;
     if (isBrowser()) {
       window.localStorage.removeItem(STORAGE_KEY);
     }

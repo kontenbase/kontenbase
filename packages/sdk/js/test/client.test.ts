@@ -56,6 +56,10 @@ describe('Client', () => {
 
     expect(response.status).toBe(200);
     expect(response.user?.email).toBe(EMAIL);
+
+    const token = kontenbase.auth.token();
+
+    expect(response.token).toBe(token);
   });
 
   test('token', async () => {
@@ -163,7 +167,9 @@ describe('Client', () => {
   });
 
   test('logout', async () => {
+    const token = kontenbase.auth.token();
     const response = await kontenbase.auth.logout();
     expect(response.status).toBe(200);
+    expect(response.token).toBe(token);
   });
 });
