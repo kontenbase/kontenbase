@@ -62,13 +62,13 @@ const { user } = await kontenbase.auth.user()
 ### Update
 
 ```js
-const { user, token } = await kontenbase.auth.update({ firstName: "John" })
+const { user } = await kontenbase.auth.update({ firstName: "John" })
 ```
 
 ### Logout
 
 ```js
-const { user } = await kontenbase.auth.logout()
+const { user, token } = await kontenbase.auth.logout()
 ```
 
 ## Database 
