@@ -51,7 +51,7 @@ export default class AuthClient {
     return new Promise(async (resolve, reject) => {
       try {
         const { data, status, statusText } = await axios.post(
-          `${this.url}/login`,
+          `${this.url}/auth/login`,
           body,
         );
         this.saveToken(data.token);
@@ -70,7 +70,7 @@ export default class AuthClient {
     return new Promise(async (resolve, reject) => {
       try {
         const { data, status, statusText } = await axios.post(
-          `${this.url}/register`,
+          `${this.url}/auth/register`,
           body,
         );
         this.saveToken(data.token);
@@ -85,11 +85,11 @@ export default class AuthClient {
     });
   }
 
-  async profile<T = any>(): Promise<ProfileResponse<T>> {
+  async user<T = any>(): Promise<ProfileResponse<T>> {
     return new Promise(async (resolve, reject) => {
       try {
         const { data, status, statusText } = await axios.get<T>(
-          `${this.url}/profile`,
+          `${this.url}/auth/user`,
           {
             headers: this._headers(),
           },
@@ -105,11 +105,11 @@ export default class AuthClient {
     });
   }
 
-  async updateProfile<T = any>(body: Partial<T>): Promise<ProfileResponse<T>> {
+  async update<T = any>(body: Partial<T>): Promise<ProfileResponse<T>> {
     return new Promise(async (resolve, reject) => {
       try {
         const { data, status, statusText } = await axios.patch<T>(
-          `${this.url}/profile`,
+          `${this.url}/auth/user`,
           body,
           {
             headers: this._headers(),
@@ -148,7 +148,7 @@ export default class AuthClient {
     return new Promise(async (resolve, reject) => {
       try {
         const { data, status, statusText } = await axios.post<Logout>(
-          `${this.url}/logout`,
+          `${this.url}/auth/logout`,
           null,
           {
             headers: this._headers(),

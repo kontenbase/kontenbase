@@ -53,16 +53,16 @@ const { data } = await kontenbase.auth.login({
 })
 ```
 
-### Profile
+### User
 
 ```js
-const { data } = await kontenbase.auth.profile()
+const { data } = await kontenbase.auth.user()
 ```
 
-### Update Profile
+### Update
 
 ```js
-const { data } = await kontenbase.auth.updateProfile({ firstName: "John" })
+const { data } = await kontenbase.auth.update({ firstName: "John" })
 ```
 
 ### Logout

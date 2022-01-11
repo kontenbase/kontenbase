@@ -56,12 +56,12 @@ describe('Client', () => {
   });
 
   test('profile', async () => {
-    const response = await kontenbase.auth.profile();
+    const response = await kontenbase.auth.user();
     expect(response.status).toBe(200);
   });
 
   test('updateProfile', async () => {
-    const response = await kontenbase.auth.updateProfile({
+    const response = await kontenbase.auth.update({
       firstName: 'Tester',
     });
 
