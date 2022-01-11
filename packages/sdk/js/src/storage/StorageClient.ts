@@ -65,7 +65,7 @@ export default class StorageClient {
           formHeaders = form.getHeaders();
         }
         const { data, status, statusText } = await axios.post<Storage>(
-          this.url,
+          this.url + '/upload',
           form,
           {
             headers: {

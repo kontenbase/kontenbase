@@ -29,7 +29,7 @@ export default class KontenbaseClient {
     this._realtimeClient = this._initRealtime();
 
     this.realtime = new Realtime(this._realtimeClient, this.auth);
-    this.storage = new StorageClient(`${this.queryUrl}/upload`, this.auth);
+    this.storage = new StorageClient(`${this.queryUrl}/storage`, this.auth);
   }
 
   private _getHeaders(): { [key: string]: string } {
