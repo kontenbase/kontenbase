@@ -19,6 +19,12 @@ interface Todo {
   categories: [string];
 }
 
+interface User {
+  _id: string;
+  email: string;
+  firstName: string;
+}
+
 test('it should create the client connection', async () => {
   expect(kontenbase).toBeDefined();
 });
@@ -34,7 +40,7 @@ describe('Client', () => {
   let secondId: string;
 
   const login = () => {
-    return kontenbase.auth.login({
+    return kontenbase.auth.login<User>({
       email: EMAIL,
       password: PASSWORD,
     });
@@ -49,6 +55,7 @@ describe('Client', () => {
     const response = await login();
 
     expect(response.status).toBe(200);
+    expect(response.user?.email).toBe(EMAIL);
   });
 
   test('token', async () => {
@@ -56,16 +63,18 @@ describe('Client', () => {
   });
 
   test('profile', async () => {
-    const response = await kontenbase.auth.user();
+    const response = await kontenbase.auth.user<User>();
     expect(response.status).toBe(200);
+    expect(response.user?.email).toBe(EMAIL);
   });
 
   test('updateProfile', async () => {
-    const response = await kontenbase.auth.update({
+    const response = await kontenbase.auth.update<User>({
       firstName: 'Tester',
     });
 
     expect(response.status).toBe(200);
+    expect(response.user?.email).toBe(EMAIL);
   });
 
   test('create', async () => {
@@ -73,6 +82,7 @@ describe('Client', () => {
       .service<Todo>(SERVICE_NAME)
       .create({ name: 'Hello' });
     id = response.data?._id || '';
+
     expect(response.status).toBe(201);
   });
 
@@ -86,7 +96,6 @@ describe('Client', () => {
 
   test('find', async () => {
     const response = await kontenbase.service<Todo>(SERVICE_NAME).find();
-
     expect(response.status).toBe(200);
   });
 
