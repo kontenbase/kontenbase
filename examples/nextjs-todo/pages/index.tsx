@@ -21,26 +21,24 @@ const Home: NextPage = () => {
   const [update, setUpdate] = useState<TodoType | null>();
   const [loading, setLoading] = useState(true);
 
-
-  const getData = () => {
-    kontenbase
+  const getData = async () => {
+    const { data, error } = await kontenbase
       .service<TodoType>(SERVICE_NAME)
-      .find()
-      .then((res) => {
-        setItems(res.data || []);
-      });
+      .find();
+
+    if (!error) {
+      setItems(data || []);
+    }
   };
 
-  const getProfile = () => {
-    kontenbase.auth
-      .profile()
-      .then((res) => {
-        setLoading(false);
-        setUser(res.data);
-      })
-      .catch((err) => {
-        router.push('/login');
-      });
+  const getProfile = async () => {
+    const { user, error } = await kontenbase.auth.user();
+    setLoading(false);
+    if (error) {
+      router.push('/login');
+    } else {
+      setUser(user);
+    }
   };
 
   useEffect(() => {
@@ -60,33 +58,35 @@ const Home: NextPage = () => {
     if (!name) {
       return;
     }
+    const { error } = await kontenbase
+      .service<TodoType>(SERVICE_NAME)
+      .create({ name });
 
-    try {
-      await kontenbase.service<TodoType>(SERVICE_NAME).create({ name });
+    if (error) {
+      alert(error.message);
+    } else {
       setValue('');
       getData();
-    } catch (err: any) {
-      alert(err.message);
     }
   };
 
-  const handleDelete = (item: TodoType) => {
-    kontenbase
+  const handleDelete = async (item: TodoType) => {
+    const { error } = await kontenbase
       .service<TodoType>(SERVICE_NAME)
-      .deleteById(item._id)
-      .then((res) => {
-        getData();
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
+      .deleteById(item._id);
+
+    if (error) {
+      alert(error.message);
+    } else {
+      getData();
+    }
   };
 
   const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
 
-  const handleChangeCheckbox = (
+  const handleChangeCheckbox = async (
     e: React.ChangeEvent<HTMLInputElement>,
     data: TodoType,
   ) => {
@@ -99,13 +99,14 @@ const Home: NextPage = () => {
       });
     });
 
-    kontenbase
+    const { error } = await kontenbase
       .service<TodoType>(SERVICE_NAME)
-      .updateById(data._id, { checked: e.target.checked })
-      .catch((err) => {
-        getData();
-        alert(err.message);
-      });
+      .updateById(data._id, { checked: e.target.checked });
+
+    if (error) {
+      getData();
+      alert(error.message);
+    }
   };
 
   const handleSubmitUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -122,13 +123,14 @@ const Home: NextPage = () => {
 
       setUpdate(null);
 
-      kontenbase
+      const { error } = await kontenbase
         .service<TodoType>(SERVICE_NAME)
-        .updateById(update._id, { name: update?.name })
-        .catch((err) => {
-          getData();
-          alert(err.message);
-        });
+        .updateById(update._id, { name: update?.name });
+
+      if (error) {
+        getData();
+        alert(error.message);
+      }
     }
   };
 
@@ -147,7 +149,7 @@ const Home: NextPage = () => {
             className={formStyles.input}
             value={value}
             onChange={handleChangeValue}
-            placeholder='Add your new todo'
+            placeholder="Add your new todo"
             autoFocus
           />
           <button className={formStyles.button} type="submit">
@@ -166,7 +168,7 @@ const Home: NextPage = () => {
                     name="name"
                     className={formStyles.input}
                     value={update.name}
-                    placeholder='Update todo'
+                    placeholder="Update todo"
                     onChange={(e) => {
                       console.log(e.target.value);
                       setUpdate({
@@ -203,19 +205,13 @@ const Home: NextPage = () => {
                     onClick={() => setUpdate(item)}
                     className={styles.iconButton}
                   >
-                  <img
-                    alt="Update"
-                    src="/update.svg"
-                  />
+                    <img alt="Update" src="/update.svg" />
                   </button>
                   <button
                     onClick={() => handleDelete(item)}
                     className={styles.iconButton}
                   >
-                  <img
-                    alt="Delete"
-                    src="/delete.svg"
-                  />
+                    <img alt="Delete" src="/delete.svg" />
                   </button>
                 </div>
               </div>

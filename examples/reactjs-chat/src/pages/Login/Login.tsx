@@ -17,14 +17,14 @@ const Login = () => {
     const email = target.email.value
     const password = target.password.value
 
-    try {
-      setIsLoading(true)
-      await kontenbase.auth.login({ email, password })
-      setIsLoading(false)
-      navigate('/')
-    } catch (error: any) {
-      setIsLoading(false)
+    setIsLoading(true)
+    const { error } = await kontenbase.auth.login({ email, password })
+    setIsLoading(false)
+
+    if (error) {
       alert(error.message)
+    } else {
+      navigate('/')
     }
   }
 

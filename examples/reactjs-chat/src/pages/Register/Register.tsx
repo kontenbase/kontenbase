@@ -28,15 +28,16 @@ const Register = () => {
       lastName = split.join(" ");
     }
 
-    try {
-      setIsLoading(true)
-      await kontenbase.auth.register({ email, password, firstName, lastName })
-      setIsLoading(false)
-      navigate('/')
-    } catch (error: any) {
-      setIsLoading(false)
+    setIsLoading(true)
+    const { error } = await kontenbase.auth.register({ email, password, firstName, lastName })
+    setIsLoading(false)
+
+    if (error) {
       alert(error.message)
+    } else {
+      navigate('/')
     }
+
   }
 
   return (
