@@ -234,7 +234,7 @@ kontenbase.realtime.unsubscribe(key)
 ```
 
 ## CDN
-You can now use plain `<script>`s to import supabase-js from CDNs, like:
+You can now use plain `<script>`s to import kontenbase from CDNs, like:
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@kontenbase/sdk"></script>
@@ -250,7 +250,7 @@ Then you can use it from a global `kontenbase` variable:
     apiKey: '*******************'
   })
 
-  .service('New Service').find().then(res => {
+  client.service('New Service').find().then(res => {
     if (res.error) {
       console.log(res.error)
       return
