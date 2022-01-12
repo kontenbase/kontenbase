@@ -29,11 +29,17 @@ const Register: NextPage = () => {
       lastName = split.join(' ');
     }
 
-    try {
-      await kontenbase.auth.register({ email, password, firstName, lastName });
-      replace('/');
-    } catch (error: any) {
+    const { error } = await kontenbase.auth.register({
+      email,
+      password,
+      firstName,
+      lastName,
+    });
+
+    if (error) {
       alert(error.message);
+    } else {
+      replace('/');
     }
   };
 

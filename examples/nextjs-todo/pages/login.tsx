@@ -17,12 +17,11 @@ const Login: NextPage = () => {
     };
     const email = target.email.value;
     const password = target.password.value;
-
-    try {
-      await kontenbase.auth.login({ email, password });
-      replace('/');
-    } catch (error: any) {
+    const { error } = await kontenbase.auth.login({ email, password });
+    if (error) {
       alert(error.message);
+    } else {
+      replace('/');
     }
   };
 

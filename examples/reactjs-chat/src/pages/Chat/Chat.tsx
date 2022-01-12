@@ -19,36 +19,30 @@ const Chat = () => {
   const [subscribeKey, setSubsribeKey] = useState<string>('')
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const getProfile = () => {
-    kontenbase.auth.profile()
-      .then(res => {
-        setUser(res.data)
-      })
-      .catch(err => {
-        navigate('/login')
-      })
+  const getProfile = async () => {
+    const { user, error } = await kontenbase.auth.user();
+    
+    if (error) {
+      navigate('/login')
+    } else {
+      setUser(user)
+    }
   }
 
-  const getChats = () => {
-    kontenbase.service<ChatType>(SERVICE_NAME).find({
-      sort: {
-        createdAt: Sort.DESC
-      }
-    })
-      .then(res => {
-        setChats(res.data?.reverse())
-      })
-      .catch((err: any) => {
-        alert(err.message)
-      })
+  const getChats = async () => {
+    const { data, error } = await kontenbase.service<ChatType>(SERVICE_NAME).find()
+
+    if (error) {
+      alert(error.message)
+    } else {
+      setChats(data)
+    }
   }
 
   const subscribeChats = async () => {
     try {
-      const subscribeKey = await kontenbase.realtime.subscribe(SERVICE_NAME, (message) => {
-        if (message.event === "CREATE_RECORD") {
-          getChats()
-        }
+      const subscribeKey = await kontenbase.realtime.subscribe(SERVICE_NAME, { event: 'CREATE_RECORD' } ,(message) => {
+        getChats()
       })
 
       setSubsribeKey(subscribeKey)
