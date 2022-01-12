@@ -1,10 +1,10 @@
 # Kontenbase SDK
 
-This is the Official Node JS and Browser client/library for Kontenbase API. Visit https://kontenbase.com. More information about the product and see documentation at http://kontenbase.com/api for more technical details.
+This is the Official Node JS and Browser client/library for Kontenbase API. Visit https://kontenbase.com. More information about the product and see documentation at http://docs.kontenbase.com for more technical details.
 
 ## API Documentation
 
-Please check [Kontenbase API Reference](http:/kontenbase.com/api).
+Please check [Kontenbase API Reference](http:/docs.kontenbase.com).
 
 ## Installation
 
@@ -221,4 +221,32 @@ const key = await kontenbase.realtime.subscribe('New Service', { event: "*" } , 
 })
 
 kontenbase.realtime.unsubscribe(key)
+```
+
+## CDN
+You can now use plain `<script>`s to import supabase-js from CDNs, like:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@kontenbase/sdk"></script>
+```
+
+
+Then you can use it from a global `kontenbase` variable:
+
+```html
+<script>
+  const { createClient } = kontenbase
+  const client = createClient({
+    apiKey: '*******************'
+  })
+
+  .service('New Service').find().then(res => {
+    if (res.error) {
+      console.log(res.error)
+      return
+    }
+
+    console.log(res)
+  })
+</script>
 ```
