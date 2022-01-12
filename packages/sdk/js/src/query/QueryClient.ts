@@ -101,7 +101,7 @@ export default class QueryClient<T> {
           data,
           status,
           statusText,
-          count: Number(headers['x-total-count']),
+          count: Number(headers['x-pagination-count']),
           limit: Number(headers['x-pagination-limit']),
           skip: Number(headers['x-pagination-skip']),
         });
