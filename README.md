@@ -37,7 +37,7 @@ Kontenbase let you focus on the Frontend & Product.
 
 
 ## Documentation
-Our Documentation will be coming soon! Please be patient while visiting [kontenbase.com](https://kontenbase.com)
+Visit our documentation at [docs.kontenbase.com](https://docs.kontenbase.com)
 
 
 ## Status
