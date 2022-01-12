@@ -20,17 +20,22 @@ export default class QueryClient<T> {
   private _error(error: any): KontenbaseResponseFailure {
     if (axios.isAxiosError(error) && error.response) {
       return {
-        message:
-          typeof error.response.data === 'object'
+        error: {
+          message: error.response.data?.message
+            ? error.response.data.message
+            : typeof error.response.data === 'object'
             ? JSON.stringify(error.response.data)
             : String(error.response.data),
+        },
         status: error.response.status,
         statusText: error.response.statusText,
       };
     }
 
     return {
-      message: 'Failed',
+      error: {
+        message: 'Failed',
+      },
       status: 500,
       statusText: 'FAILED',
     };
@@ -82,7 +87,7 @@ export default class QueryClient<T> {
   }
 
   async find(find?: FindOption<T>): Promise<KontenbaseResponse<T>> {
-    return new Promise(async (resove, reject) => {
+    return new Promise(async (resolve, reject) => {
       try {
         const query = this._filter(find);
         const { data, status, statusText, headers } = await axios.get<T[]>(
@@ -92,7 +97,7 @@ export default class QueryClient<T> {
           },
         );
 
-        resove({
+        resolve({
           data,
           status,
           statusText,
@@ -101,7 +106,7 @@ export default class QueryClient<T> {
           skip: Number(headers['x-pagination-skip']),
         });
       } catch (error) {
-        reject(this._error(error));
+        resolve(this._error(error));
       }
     });
   }
@@ -122,7 +127,7 @@ export default class QueryClient<T> {
           statusText,
         });
       } catch (error) {
-        reject(this._error(error));
+        resolve(this._error(error));
       }
     });
   }
@@ -144,7 +149,7 @@ export default class QueryClient<T> {
           statusText,
         });
       } catch (error) {
-        return reject(this._error(error));
+        return resolve(this._error(error));
       }
     });
   }
@@ -169,7 +174,7 @@ export default class QueryClient<T> {
           statusText,
         });
       } catch (error) {
-        reject(this._error(error));
+        resolve(this._error(error));
       }
     });
   }
@@ -190,7 +195,7 @@ export default class QueryClient<T> {
           statusText,
         });
       } catch (error) {
-        reject(this._error(error));
+        resolve(this._error(error));
       }
     });
   }
@@ -214,7 +219,7 @@ export default class QueryClient<T> {
           statusText,
         });
       } catch (error) {
-        reject(this._error(error));
+        resolve(this._error(error));
       }
     });
   }
@@ -238,7 +243,7 @@ export default class QueryClient<T> {
           statusText,
         });
       } catch (error) {
-        reject(this._error(error));
+        resolve(this._error(error));
       }
     });
   }

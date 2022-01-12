@@ -3,14 +3,17 @@ interface AuthResponseBase {
   statusText: string;
 }
 
+export interface AuthError {
+  message: string;
+}
 export interface AuthResponseFailure extends AuthResponseBase {
-  message?: string;
+  error?: AuthError;
   user?: null;
   token?: null;
 }
 
 export interface AuthResponseSuccess<T> extends AuthResponseBase {
-  error?: null;
+  error?: AuthError;
   user: T;
   token: string;
 }

@@ -8,10 +8,15 @@ export interface KontenbaseResponseSuccess<T> extends KontenbaseResponseBase {
   count?: number | null;
   skip?: number | null;
   limit?: number | null;
+  error?: KontenbaseError;
+}
+
+export interface KontenbaseError {
+  message: string;
 }
 
 export interface KontenbaseResponseFailure extends KontenbaseResponseBase {
-  message?: string;
+  error?: KontenbaseError;
   data?: null;
 }
 

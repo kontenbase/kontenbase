@@ -19,17 +19,22 @@ export default class StorageClient {
   private _error(error: any): StorageResponseFailure {
     if (axios.isAxiosError(error) && error.response) {
       return {
-        message:
-          typeof error.response.data === 'object'
+        error: {
+          message: error.response.data?.message
+            ? error.response.data.message
+            : typeof error.response.data === 'object'
             ? JSON.stringify(error.response.data)
             : String(error.response.data),
+        },
         status: error.response.status,
         statusText: error.response.statusText,
       };
     }
 
     return {
-      message: 'Failed',
+      error: {
+        message: 'Failed',
+      },
       status: 500,
       statusText: 'FAILED',
     };
@@ -81,8 +86,7 @@ export default class StorageClient {
           statusText,
         });
       } catch (error) {
-        console.log(error);
-        return reject(this._error(error));
+        return resolve(this._error(error));
       }
     });
   }

@@ -36,7 +36,7 @@ Use kontenbase auth services for manage your user.
 ### Register
 
 ```js
-const { user, token } = await kontenbase.auth.register({
+const { user, token, error } = await kontenbase.auth.register({
   firstName: 'John',
   lastName: 'Doe',
   email: 'user@gmail.com',
@@ -47,7 +47,7 @@ const { user, token } = await kontenbase.auth.register({
 ### Login
 
 ```js
-const { user, token } = await kontenbase.auth.login({
+const { user, token, error } = await kontenbase.auth.login({
   email: 'user@gmail.com',
   password: 'password',
 })
@@ -56,26 +56,26 @@ const { user, token } = await kontenbase.auth.login({
 ### User
 
 ```js
-const { user } = await kontenbase.auth.user()
+const { user, error } = await kontenbase.auth.user()
 ```
 
 ### Update
 
 ```js
-const { user } = await kontenbase.auth.update({ firstName: "John" })
+const { user, error } = await kontenbase.auth.update({ firstName: "John" })
 ```
 
 ### Logout
 
 ```js
-const { user, token } = await kontenbase.auth.logout()
+const { user, token, error } = await kontenbase.auth.logout()
 ```
 
 ## Database 
 
 ### Create
 ```js
-const { data } = await kontenbase.service('New Service').create({
+const { data, error } = await kontenbase.service('New Service').create({
   Name: 'Record',
   Notes: 'Hello world'
 })
@@ -83,122 +83,122 @@ const { data } = await kontenbase.service('New Service').create({
 
 ### Get
 ```js
-const { data } = await kontenbase.service('New Service').getById("605a251d7b8678bf6811k3b1")
+const { data, error } = await kontenbase.service('New Service').getById("605a251d7b8678bf6811k3b1")
 ```
 
 ### Update
 ```js
-const { data } = await kontenbase.service('New Service').updateById("605a251d7b8678bf6811k3b1", {
+const { data, error } = await kontenbase.service('New Service').updateById("605a251d7b8678bf6811k3b1", {
   Name: 'New Record',
 })
 ```
 
 ### Delete
 ```js
-const { data } = await kontenbase.service('New Service').deleteById("605a251d7b8678bf6811k3b1")
+const { data, error } = await kontenbase.service('New Service').deleteById("605a251d7b8678bf6811k3b1")
 ```
 
 ### Link
 ```js
-const { data } = await kontenbase.service('New Service').link("605a251d7b8678bf6811k3b1", {
+const { data, error } = await kontenbase.service('New Service').link("605a251d7b8678bf6811k3b1", {
   categories: '61d26e8e2adb12b85c33029c',
 })
 ```
 
 ### Unlink
 ```js
-const { data } = await kontenbase.service('New Service').unlink("605a251d7b8678bf6811k3b1", {
+const { data, error } = await kontenbase.service('New Service').unlink("605a251d7b8678bf6811k3b1", {
   categories: '61d26e8e2adb12b85c33029c',
 })
 ```
 
 ### Find
 ```js
-const { data } = await kontenbase.service('New Service').find()
+const { data, error } = await kontenbase.service('New Service').find()
 ```
 
 ```js
 // sort
 // 1 = ascending
 // -1 = descending
-const { data } = await kontenbase.service('New Service').find({ sort: { name: 1 } })
+const { data, error } = await kontenbase.service('New Service').find({ sort: { name: 1 } })
 ```
 
 ```js
 // skip
-const { data } = await kontenbase.service('New Service').find({ skip: 10 })
+const { data, error } = await kontenbase.service('New Service').find({ skip: 10 })
 ```
 
 ```js
 // limit
-const { data } = await kontenbase.service('New Service').find({ limit: 10 })
+const { data, error } = await kontenbase.service('New Service').find({ limit: 10 })
 ```
 
 ```js
 // select
-const { data } = await kontenbase.service('New Service').find({ select: ['name'] })
+const { data, error } = await kontenbase.service('New Service').find({ select: ['name'] })
 ```
 
 ```js
 // lookup field link to record
-const { data } = await kontenbase.service('New Service').find({ lookup: ['categories'] })
+const { data, error } = await kontenbase.service('New Service').find({ lookup: ['categories'] })
 ```
 
 ```js
 // where
-const { data } = await kontenbase.service('New Service').find({ where: { name: 'John'} })
+const { data, error } = await kontenbase.service('New Service').find({ where: { name: 'John'} })
 ```
 
 ```js
 // not equal
-const { data } = await kontenbase.service('New Service').find({ where: { name: { $ne: 'John' } } })
+const { data, error } = await kontenbase.service('New Service').find({ where: { name: { $ne: 'John' } } })
 ```
 
 ```js
 // contains
-const { data } = await kontenbase.service('New Service').find({ where: { name: { $contains: 'John' } } })
+const { data, error } = await kontenbase.service('New Service').find({ where: { name: { $contains: 'John' } } })
 ```
 
 ```js
 // not containts
-const { data } = await kontenbase.service('New Service').find({ where: { name: { $notContains: 'John' } } })
+const { data, error } = await kontenbase.service('New Service').find({ where: { name: { $notContains: 'John' } } })
 ```
 
 ```js
 // include
-const { data } = await kontenbase.service('New Service').find({ where: { name: { $in: ['John'] } } })
+const { data, error } = await kontenbase.service('New Service').find({ where: { name: { $in: ['John'] } } })
 ```
 
 ```js
 // not include
-const { data } = await kontenbase.service('New Service').find({ where: { name: { $nin: ['John'] } } })
+const { data, error } = await kontenbase.service('New Service').find({ where: { name: { $nin: ['John'] } } })
 ```
 
 ```js
 // less then
-const { data } = await kontenbase.service('New Service').find({ where: { total: { $lt: 10 } } })
+const { data, error } = await kontenbase.service('New Service').find({ where: { total: { $lt: 10 } } })
 ```
 
 ```js
 // less then equal
-const { data } = await kontenbase.service('New Service').find({ where: { total: { $lte: 10 } } })
+const { data, error } = await kontenbase.service('New Service').find({ where: { total: { $lte: 10 } } })
 ```
 
 ```js
 // greater then
-const { data } = await kontenbase.service('New Service').find({ where: { total: { $gt: 10 } } })
+const { data, error } = await kontenbase.service('New Service').find({ where: { total: { $gt: 10 } } })
 ```
 
 ```js
 // greater then equal
-const { data } = await kontenbase.service('New Service').find({ where: { total: { $gte: 10 } } })
+const { data, error } = await kontenbase.service('New Service').find({ where: { total: { $gte: 10 } } })
 ```
 
 ## Storage
 ### Upload
 ```js
 const file = event.target.files[0]
-const { data } = await kontenbase.storage.upload(file)
+const { data, error } = await kontenbase.storage.upload(file)
 ```
 
 ## Realtime
@@ -210,14 +210,24 @@ const { data } = await kontenbase.storage.upload(file)
 ### Subscribe
 ```js
 kontenbase.realtime.subscribe('New Service', { event: "*" }, (message) => {
-  console.log(message)
+  if (message.error) {
+    console.log(message.error)
+    return;
+  }
+
+  console.log(message.event, message.payload)
 })
 ```
 
 ### Unsubscribe
 ```js
 const key = await kontenbase.realtime.subscribe('New Service', { event: "*" } , (message) => {
-  console.log(message)
+  if (message.error) {
+    console.log(message.error)
+    return;
+  }
+
+  console.log(message.event, message.payload)
 })
 
 kontenbase.realtime.unsubscribe(key)

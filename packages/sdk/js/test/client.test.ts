@@ -58,8 +58,17 @@ describe('Client', () => {
     expect(response.user?.email).toBe(EMAIL);
 
     const token = kontenbase.auth.token();
-
     expect(response.token).toBe(token);
+  });
+
+  test('login error', async () => {
+    const response = await kontenbase.auth.login<User>({
+      email: EMAIL,
+      password: PASSWORD + '1',
+    });
+
+    expect(response.status).toBe(401);
+    expect(typeof response.error?.message).toBe('string');
   });
 
   test('token', async () => {
@@ -100,7 +109,15 @@ describe('Client', () => {
 
   test('find', async () => {
     const response = await kontenbase.service<Todo>(SERVICE_NAME).find();
+
     expect(response.status).toBe(200);
+  });
+
+  test('find error', async () => {
+    const response = await kontenbase.service<Todo>(SERVICE_NAME + '1').find();
+
+    expect(response.status).toBe(400);
+    expect(typeof response.error?.message).toBe('string');
   });
 
   test('getById', async () => {
