@@ -10,14 +10,17 @@ interface StorageResponseBase {
   statusText: string;
 }
 
+export interface StorageError {
+  message: string;
+}
 export interface StorageResponseFailure extends StorageResponseBase {
-  message?: string;
+  error?: StorageError;
   data?: null;
 }
 
 export interface StorageSingleResponseSuccess extends StorageResponseBase {
   data: Storage;
-  error?: null;
+  error?: StorageError;
 }
 
 export type StorageSingleResponse =

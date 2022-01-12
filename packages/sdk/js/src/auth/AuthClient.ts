@@ -27,17 +27,22 @@ export default class AuthClient {
   private _error(error: any): AuthResponseFailure {
     if (axios.isAxiosError(error) && error.response) {
       return {
-        message:
-          typeof error.response.data === 'object'
+        error: {
+          message: error.response.data?.message
             ? error.response.data.message
+            : typeof error.response.data === 'object'
+            ? JSON.stringify(error.response.data)
             : String(error.response.data),
+        },
         status: error.response.status,
         statusText: error.response.statusText,
       };
     }
 
     return {
-      message: 'Failed',
+      error: {
+        message: 'Failed',
+      },
       status: 500,
       statusText: 'FAILED',
     };
@@ -63,7 +68,7 @@ export default class AuthClient {
           token: data.token,
         });
       } catch (error) {
-        reject(this._error(error));
+        resolve(this._error(error));
       }
     });
   }
@@ -85,7 +90,7 @@ export default class AuthClient {
           token: data.token,
         });
       } catch (error) {
-        reject(this._error(error));
+        resolve(this._error(error));
       }
     });
   }
@@ -107,7 +112,7 @@ export default class AuthClient {
           statusText,
         });
       } catch (error) {
-        reject(this._error(error));
+        resolve(this._error(error));
       }
     });
   }
@@ -130,7 +135,7 @@ export default class AuthClient {
           statusText,
         });
       } catch (error) {
-        reject(this._error(error));
+        resolve(this._error(error));
       }
     });
   }
@@ -173,7 +178,7 @@ export default class AuthClient {
           token: data.token,
         });
       } catch (error) {
-        reject(this._error(error));
+        resolve(this._error(error));
       }
     });
   }
