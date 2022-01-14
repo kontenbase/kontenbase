@@ -160,7 +160,7 @@ const { data, error } = await kontenbase.service('New Service').find({ where: { 
 ```
 
 ```js
-// not containts
+// not contains
 const { data, error } = await kontenbase.service('New Service').find({ where: { name: { $notContains: 'John' } } })
 ```
 
