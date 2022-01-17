@@ -77,9 +77,9 @@ export type FindOption<T> = {
   skip?: number;
   where?: Where<T>;
   sort?: { [P in keyof Partial<T>]: Sort | number };
-  select?: [keyof Partial<T>];
-  lookup?: [keyof Partial<T>];
-  or?: [Where<T>];
+  select?: Array<keyof Partial<T>>;
+  lookup?: Array<keyof Partial<T>>;
+  or?: Array<Where<T>>;
 };
 
 export interface QueryClientOption {
