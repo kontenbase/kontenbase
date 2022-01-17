@@ -1,6 +1,6 @@
 {
   "name": "@kontenbase/sdk",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "description": "Kontenbase SDK",
   "main": "dist/main/index.js",
   "types": "dist/main/index.d.ts",
