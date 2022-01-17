@@ -16,17 +16,16 @@ To install kontenbase in a node project:
 npm install --save @kontenbase/sdk
 ```
 
-
 ## Usage
 
 Configure package with your account's **API key** obtained from your [Kontenbase Dashboard](https://kontenbase.com).
 
 ```js
-const { KontenbaseClient } = require('@kontenbase/sdk')
+const { KontenbaseClient } = require('@kontenbase/sdk');
 
 const kontenbase = new KontenbaseClient({
   apiKey: '*******************',
-})
+});
 ```
 
 ## Authentication
@@ -37,11 +36,11 @@ Use kontenbase auth services for manage your user.
 
 ```js
 const { user, token, error } = await kontenbase.auth.register({
-  firstName: 'John',
-  lastName: 'Doe',
+  firstName: 'Ega',
+  lastName: 'Radiegtya',
   email: 'user@gmail.com',
   password: 'password',
-})
+});
 ```
 
 ### Login
@@ -50,213 +49,270 @@ const { user, token, error } = await kontenbase.auth.register({
 const { user, token, error } = await kontenbase.auth.login({
   email: 'user@gmail.com',
   password: 'password',
-})
+});
 ```
 
 ### User
 
 ```js
-const { user, error } = await kontenbase.auth.user()
+const { user, error } = await kontenbase.auth.user();
 ```
 
 ### Update
 
 ```js
-const { user, error } = await kontenbase.auth.update({ firstName: "John" })
+const { user, error } = await kontenbase.auth.update({ firstName: 'Ega' });
 ```
 
 ### Logout
 
 ```js
-const { user, token, error } = await kontenbase.auth.logout()
+const { user, token, error } = await kontenbase.auth.logout();
 ```
 
-## Database 
+## Database
 
 ### Create
+
 ```js
-const { data, error } = await kontenbase.service('New Service').create({
-  Name: 'Record',
-  Notes: 'Hello world'
-})
+const { data, error } = await kontenbase.service('posts').create({
+  name: 'Post 1',
+  notes: 'Hello kontenbase',
+});
 ```
 
 ### Get
+
 ```js
-const { data, error } = await kontenbase.service('New Service').getById("605a251d7b8678bf6811k3b1")
+const { data, error } = await kontenbase
+  .service('posts')
+  .getById('605a251d7b8678bf6811k3b1');
 ```
 
 ### Update
+
 ```js
-const { data, error } = await kontenbase.service('New Service').updateById("605a251d7b8678bf6811k3b1", {
-  Name: 'New Record',
-})
+const { data, error } = await kontenbase
+  .service('posts')
+  .updateById('605a251d7b8678bf6811k3b1', {
+    notes: 'Hello world',
+  });
 ```
 
 ### Delete
+
 ```js
-const { data, error } = await kontenbase.service('New Service').deleteById("605a251d7b8678bf6811k3b1")
+const { data, error } = await kontenbase
+  .service('posts')
+  .deleteById('605a251d7b8678bf6811k3b1');
 ```
 
 ### Link
+
 ```js
-const { data, error } = await kontenbase.service('New Service').link("605a251d7b8678bf6811k3b1", {
-  categories: '61d26e8e2adb12b85c33029c',
-})
+const { data, error } = await kontenbase
+  .service('posts')
+  .link('605a251d7b8678bf6811k3b1', {
+    categories: '61d26e8e2adb12b85c33029c',
+  });
 ```
 
 ### Unlink
+
 ```js
-const { data, error } = await kontenbase.service('New Service').unlink("605a251d7b8678bf6811k3b1", {
-  categories: '61d26e8e2adb12b85c33029c',
-})
+const { data, error } = await kontenbase
+  .service('posts')
+  .unlink('605a251d7b8678bf6811k3b1', {
+    categories: '61d26e8e2adb12b85c33029c',
+  });
 ```
 
 ### Find
+
 ```js
-const { data, error } = await kontenbase.service('New Service').find()
+const { data, error } = await kontenbase.service('posts').find();
 ```
 
 ```js
 // sort
 // 1 = ascending
 // -1 = descending
-const { data, error } = await kontenbase.service('New Service').find({ sort: { name: 1 } })
+const { data, error } = await kontenbase
+  .service('posts')
+  .find({ sort: { name: 1 } });
 ```
 
 ```js
 // skip
-const { data, error } = await kontenbase.service('New Service').find({ skip: 10 })
+const { data, error } = await kontenbase.service('posts').find({ skip: 10 });
 ```
 
 ```js
 // limit
-const { data, error } = await kontenbase.service('New Service').find({ limit: 10 })
+const { data, error } = await kontenbase.service('posts').find({ limit: 10 });
 ```
 
 ```js
 // select
-const { data, error } = await kontenbase.service('New Service').find({ select: ['name'] })
+const { data, error } = await kontenbase
+  .service('posts')
+  .find({ select: ['name'] });
 ```
 
 ```js
 // lookup field link to record
-const { data, error } = await kontenbase.service('New Service').find({ lookup: ['categories'] })
+const { data, error } = await kontenbase
+  .service('posts')
+  .find({ lookup: ['categories'] });
 ```
 
 ```js
 // where
-const { data, error } = await kontenbase.service('New Service').find({ where: { name: 'John'} })
+const { data, error } = await kontenbase
+  .service('posts')
+  .find({ where: { name: 'Ega' } });
 ```
 
 ```js
 // not equal
-const { data, error } = await kontenbase.service('New Service').find({ where: { name: { $ne: 'John' } } })
+const { data, error } = await kontenbase
+  .service('posts')
+  .find({ where: { name: { $ne: 'Ega' } } });
 ```
 
 ```js
 // contains
-const { data, error } = await kontenbase.service('New Service').find({ where: { name: { $contains: 'John' } } })
+const { data, error } = await kontenbase
+  .service('posts')
+  .find({ where: { name: { $contains: 'Ega' } } });
 ```
 
 ```js
 // not contains
-const { data, error } = await kontenbase.service('New Service').find({ where: { name: { $notContains: 'John' } } })
+const { data, error } = await kontenbase
+  .service('posts')
+  .find({ where: { name: { $notContains: 'Ega' } } });
 ```
 
 ```js
 // include
-const { data, error } = await kontenbase.service('New Service').find({ where: { name: { $in: ['John'] } } })
+const { data, error } = await kontenbase
+  .service('posts')
+  .find({ where: { name: { $in: ['Ega'] } } });
 ```
 
 ```js
 // not include
-const { data, error } = await kontenbase.service('New Service').find({ where: { name: { $nin: ['John'] } } })
+const { data, error } = await kontenbase
+  .service('posts')
+  .find({ where: { name: { $nin: ['Ega'] } } });
 ```
 
 ```js
 // less then
-const { data, error } = await kontenbase.service('New Service').find({ where: { total: { $lt: 10 } } })
+const { data, error } = await kontenbase
+  .service('posts')
+  .find({ where: { total: { $lt: 10 } } });
 ```
 
 ```js
 // less then equal
-const { data, error } = await kontenbase.service('New Service').find({ where: { total: { $lte: 10 } } })
+const { data, error } = await kontenbase
+  .service('posts')
+  .find({ where: { total: { $lte: 10 } } });
 ```
 
 ```js
 // greater then
-const { data, error } = await kontenbase.service('New Service').find({ where: { total: { $gt: 10 } } })
+const { data, error } = await kontenbase
+  .service('posts')
+  .find({ where: { total: { $gt: 10 } } });
 ```
 
 ```js
 // greater then equal
-const { data, error } = await kontenbase.service('New Service').find({ where: { total: { $gte: 10 } } })
+const { data, error } = await kontenbase
+  .service('posts')
+  .find({ where: { total: { $gte: 10 } } });
 ```
 
 ## Storage
+
 ### Upload
+
 ```js
-const file = event.target.files[0]
-const { data, error } = await kontenbase.storage.upload(file)
+const file = event.target.files[0];
+const { data, error } = await kontenbase.storage.upload(file);
 ```
 
 ## Realtime
+
 ### Event
+
 - `*`
 - `CREATE_RECORD`
 - `UPDATE_RECORD`
 - `DELETE_RECORD`
+
 ### Subscribe
+
 ```js
-kontenbase.realtime.subscribe('New Service', { event: "*" }, (message) => {
+kontenbase.realtime.subscribe('posts', { event: '*' }, (message) => {
   if (message.error) {
-    console.log(message.error)
+    console.log(message.error);
     return;
   }
 
-  console.log(message.event, message.payload)
-})
+  console.log(message.event, message.payload);
+});
 ```
 
 ### Unsubscribe
+
 ```js
-const key = await kontenbase.realtime.subscribe('New Service', { event: "*" } , (message) => {
-  if (message.error) {
-    console.log(message.error)
-    return;
-  }
+const key = await kontenbase.realtime.subscribe(
+  'posts',
+  { event: '*' },
+  (message) => {
+    if (message.error) {
+      console.log(message.error);
+      return;
+    }
 
-  console.log(message.event, message.payload)
-})
+    console.log(message.event, message.payload);
+  },
+);
 
-kontenbase.realtime.unsubscribe(key)
+kontenbase.realtime.unsubscribe(key);
 ```
 
 ## CDN
+
 You can now use plain `<script>`s to import kontenbase from CDNs, like:
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@kontenbase/sdk"></script>
 ```
 
-
 Then you can use it from a global `kontenbase` variable:
 
 ```html
 <script>
-  const { createClient } = kontenbase
+  const { createClient } = kontenbase;
   const client = createClient({
-    apiKey: '*******************'
-  })
+    apiKey: '*******************',
+  });
 
-  client.service('New Service').find().then(res => {
-    if (res.error) {
-      console.log(res.error)
-      return
-    }
+  client
+    .service('posts')
+    .find()
+    .then((res) => {
+      if (res.error) {
+        console.log(res.error);
+        return;
+      }
 
-    console.log(res)
-  })
+      console.log(res);
+    });
 </script>
 ```

@@ -11,6 +11,6 @@ module.exports = {
     '!**/vendor/**',
     '!**/vendor/**',
   ],
-  setupFiles: ["dotenv/config"],
-  modulePathIgnorePatterns: ["./examples/*"]
-}
+  setupFiles: ['dotenv/config'],
+  modulePathIgnorePatterns: ['./examples/*'],
+};
