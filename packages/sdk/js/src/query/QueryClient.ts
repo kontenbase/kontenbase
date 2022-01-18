@@ -87,7 +87,7 @@ export default class QueryClient<T> {
   }
 
   async find(find?: FindOption<T>): Promise<KontenbaseResponse<T>> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, _reject) => {
       try {
         const query = this._filter(find);
         const { data, status, statusText, headers } = await axios.get<T[]>(
@@ -112,7 +112,7 @@ export default class QueryClient<T> {
   }
 
   async getById(id: string): Promise<KontenbaseSingleResponse<T>> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, _reject) => {
       try {
         const { data, status, statusText } = await axios.get<T>(
           `${this.url}/${id}`,
@@ -133,7 +133,7 @@ export default class QueryClient<T> {
   }
 
   async create(body: Partial<T>): Promise<KontenbaseSingleResponse<T>> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, _reject) => {
       try {
         const { data, status, statusText } = await axios.post<T>(
           this.url,
@@ -149,7 +149,7 @@ export default class QueryClient<T> {
           statusText,
         });
       } catch (error) {
-        return resolve(this._error(error));
+        resolve(this._error(error));
       }
     });
   }
@@ -158,7 +158,7 @@ export default class QueryClient<T> {
     id: string,
     body: Partial<T>,
   ): Promise<KontenbaseSingleResponse<T>> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, _reject) => {
       try {
         const { data, status, statusText } = await axios.patch<T>(
           `${this.url}/${id}`,
@@ -180,7 +180,7 @@ export default class QueryClient<T> {
   }
 
   async deleteById(id: string): Promise<KontenbaseSingleResponse<T>> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, _reject) => {
       try {
         const { data, status, statusText } = await axios.delete<T>(
           `${this.url}/${id}`,
@@ -204,7 +204,7 @@ export default class QueryClient<T> {
     id: string,
     body: { [key: string]: string },
   ): Promise<KontenbaseSingleResponse<T>> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, _reject) => {
       try {
         const { data, status, statusText } = await axios.request<T>({
           method: 'LINK',
@@ -228,7 +228,7 @@ export default class QueryClient<T> {
     id: string,
     body: { [key: string]: string },
   ): Promise<KontenbaseSingleResponse<T>> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, _reject) => {
       try {
         const { data, status, statusText } = await axios.request<T>({
           method: 'UNLINK',

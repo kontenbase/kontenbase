@@ -3,29 +3,33 @@ interface KontenbaseResponseBase {
   statusText: string;
 }
 
-export interface KontenbaseResponseSuccess<T> extends KontenbaseResponseBase {
-  data?: T[];
-  count?: number | null;
-  skip?: number | null;
-  limit?: number | null;
-  error?: KontenbaseError;
-}
-
-export interface KontenbaseError {
+interface KontenbaseError {
   message: string;
 }
 
-export interface KontenbaseResponseFailure extends KontenbaseResponseBase {
-  error?: KontenbaseError;
-  data?: null;
+interface KontenbaseResponseSuccess<T> extends KontenbaseResponseBase {
+  data?: T[];
+  error?: null;
 }
 
-export type KontenbaseResponse<T> =
-  | KontenbaseResponseSuccess<T>
-  | KontenbaseResponseFailure;
+export interface KontenbaseResponseFailure extends KontenbaseResponseBase {
+  data?: null;
+  error?: KontenbaseError;
+}
 
-export interface KontenbaseSingleResponseSuccess<T>
-  extends KontenbaseResponseBase {
+interface Pagination {
+  count?: number | null;
+  limit?: number | null;
+  skip?: number | null;
+}
+
+export type KontenbaseResponse<T> = (
+  | KontenbaseResponseSuccess<T>
+  | KontenbaseResponseFailure
+) &
+  Pagination;
+
+interface KontenbaseSingleResponseSuccess<T> extends KontenbaseResponseBase {
   data?: T;
   error?: null;
 }
@@ -34,12 +38,12 @@ export type KontenbaseSingleResponse<T> =
   | KontenbaseSingleResponseSuccess<T>
   | KontenbaseResponseFailure;
 
-export enum Sort {
+enum Sort {
   ASC = 1,
   DESC = -1,
 }
 
-export type Where<T> =
+type Where<T> =
   | Partial<T>
   | {
       [P in keyof Partial<T> | string]:

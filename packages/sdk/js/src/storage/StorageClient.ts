@@ -61,7 +61,7 @@ export default class StorageClient {
       | URLSearchParams
       | string,
   ): Promise<StorageSingleResponse> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, _reject) => {
       try {
         const form = new FormData();
         form.append('file', file);

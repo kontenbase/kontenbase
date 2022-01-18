@@ -58,6 +58,7 @@ describe('Client', () => {
     expect(response.user?.email).toBe(EMAIL);
 
     const token = kontenbase.auth.token();
+
     expect(response.token).toBe(token);
   });
 
@@ -75,19 +76,28 @@ describe('Client', () => {
     expect(kontenbase.auth.token() !== null).toBe(true);
   });
 
-  test('profile', async () => {
+  test('user', async () => {
     const response = await kontenbase.auth.user<User>();
+
     expect(response.status).toBe(200);
     expect(response.user?.email).toBe(EMAIL);
   });
 
-  test('updateProfile', async () => {
+  test('update', async () => {
     const response = await kontenbase.auth.update<User>({
       firstName: 'Tester',
     });
 
     expect(response.status).toBe(200);
     expect(response.user?.email).toBe(EMAIL);
+  });
+
+  test('logout', async () => {
+    const token = kontenbase.auth.token();
+    const response = await kontenbase.auth.logout();
+
+    expect(response.status).toBe(200);
+    expect(response.token).toBe(token);
   });
 
   test('create', async () => {
@@ -103,6 +113,7 @@ describe('Client', () => {
     const response = await kontenbase
       .service<Todo>(SECOND_SERVICE_NAME)
       .create({ name: 'Yes' });
+
     secondId = response.data?._id || '';
     expect(response.status).toBe(201);
   });
@@ -122,6 +133,7 @@ describe('Client', () => {
 
   test('getById', async () => {
     const response = await kontenbase.service<Todo>(SERVICE_NAME).getById(id);
+
     expect(response.status).toBe(200);
   });
 
@@ -129,6 +141,7 @@ describe('Client', () => {
     const response = await kontenbase
       .service<Todo>(SERVICE_NAME)
       .updateById(id, { name: 'Updated' });
+
     expect(response.status).toBe(200);
   });
 
@@ -152,6 +165,7 @@ describe('Client', () => {
     const response = await kontenbase
       .service<Todo>(SERVICE_NAME)
       .deleteById(id);
+
     expect(response.status).toBe(200);
   });
 
@@ -159,6 +173,7 @@ describe('Client', () => {
     const response = await kontenbase
       .service<Todo>(SECOND_SERVICE_NAME)
       .deleteById(secondId);
+
     expect(response.status).toBe(200);
   });
 
@@ -166,10 +181,11 @@ describe('Client', () => {
     const filePath = path.join(__dirname, 'icon.png');
     const file = fs.createReadStream(filePath);
     const response = await kontenbase.storage.upload(file);
+
     expect(response.status).toBe(200);
   });
 
-  test('subscribe', async () => {
+  test('realtime', async () => {
     const key = await kontenbase.realtime.subscribe<Todo>(
       SERVICE_NAME,
       { event: '*', where: { name: 'tes' } },
@@ -177,16 +193,8 @@ describe('Client', () => {
         console.log(message);
       },
     );
-
     const unsubscribe = kontenbase.realtime.unsubscribe(key);
 
     expect(unsubscribe).toBe(true);
-  });
-
-  test('logout', async () => {
-    const token = kontenbase.auth.token();
-    const response = await kontenbase.auth.logout();
-    expect(response.status).toBe(200);
-    expect(response.token).toBe(token);
   });
 });

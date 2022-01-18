@@ -52,7 +52,7 @@ export default class AuthClient {
     email: string;
     password: string;
   }): Promise<AuthResponse<T>> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, _reject) => {
       try {
         const { data, status, statusText } = await axios.post<TokenResponse<T>>(
           `${this.url}/auth/login`,
@@ -74,7 +74,7 @@ export default class AuthClient {
   }
 
   async register<T = any>(body: Partial<T>): Promise<AuthResponse<T>> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, _reject) => {
       try {
         const { data, status, statusText } = await axios.post<TokenResponse<T>>(
           `${this.url}/auth/register`,
@@ -96,7 +96,7 @@ export default class AuthClient {
   }
 
   async user<T = any>(): Promise<ProfileResponse<T>> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, _reject) => {
       try {
         const { data, status, statusText } = await axios.get<T>(
           `${this.url}/auth/user`,
@@ -118,7 +118,7 @@ export default class AuthClient {
   }
 
   async update<T = any>(body: Partial<T>): Promise<ProfileResponse<T>> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, _reject) => {
       try {
         const { data, status, statusText } = await axios.patch<T>(
           `${this.url}/auth/user`,
@@ -159,7 +159,7 @@ export default class AuthClient {
   }
 
   async logout<T = any>(): Promise<AuthResponse<T>> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, _reject) => {
       try {
         const { data, status, statusText } = await axios.post<TokenResponse<T>>(
           `${this.url}/auth/logout`,
