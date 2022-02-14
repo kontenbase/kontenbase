@@ -51,9 +51,7 @@ export default class RealtimeClient {
         let filter = '';
 
         if (where) {
-          filter =
-            ':' +
-            qs.stringify(where, { encode: false, arrayFormat: 'brackets' });
+          filter = ':' + qs.stringify(where, { encode: false });
         }
 
         const channel = `${getChannel.data.name}:${event || '*'}${filter}`;

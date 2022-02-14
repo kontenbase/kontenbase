@@ -1,22 +1,19 @@
 {
-  "include": ["src"],
-  "exclude": ["node_modules/**/*.ts"],
   "compilerOptions": {
     "declaration": true,
     "declarationMap": true,
-    "module": "CommonJS",
+    "module": "commonjs",
     "outDir": "dist/main",
     "rootDir": "src",
     "sourceMap": true,
-    "target": "ES2015",
-
+    "target": "es6",
     "strict": true,
-
     "esModuleInterop": true,
-    "moduleResolution": "Node",
-
+    "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
     "stripInternal": true,
     "allowSyntheticDefaultImports": true
-  }
+  },
+  "include": ["src", "test"],
+  "exclude": ["node_modules/**/*.ts"]
 }
