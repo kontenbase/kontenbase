@@ -17,3 +17,6 @@ export const KONTENBASE_API_KEY = 'your-api-key-here'
 ```
 
 Run the project live server via `http://localhost:3000`. It's mandatory because without a server, it will be blocked by CORS policy.
+
+- With VS Code, you can use [Live Server extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+- With Node.js via terminal, you can use [live-server](https://www.npmjs.com/package/live-server)
