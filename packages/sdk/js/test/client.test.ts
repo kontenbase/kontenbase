@@ -198,3 +198,9 @@ describe('Client', () => {
     expect(unsubscribe).toBe(true);
   });
 });
+
+test('count', async () => {
+  const response = await kontenbase.service<Todo>(SERVICE_NAME).count();
+
+  expect(response.status).toBe(200);
+});

@@ -236,6 +236,12 @@ const { data, error } = await kontenbase
   .find({ where: { total: { $gte: 10 } } });
 ```
 
+### Count
+
+```js
+const { count, error } = await kontenbase.service('posts').count();
+```
+
 ## Storage
 
 ### Upload

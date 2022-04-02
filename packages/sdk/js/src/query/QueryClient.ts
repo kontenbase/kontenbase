@@ -6,6 +6,8 @@ import {
   KontenbaseSingleResponse,
   FindOption,
   QueryClientOption,
+  KontenbaseCount,
+  KontenbaseResponseCount,
 } from './lib/types';
 
 export default class QueryClient<T> {
@@ -101,7 +103,6 @@ export default class QueryClient<T> {
           data,
           status,
           statusText,
-          count: Number(headers['x-total-count']),
           limit: Number(headers['x-pagination-limit']),
           skip: Number(headers['x-pagination-skip']),
         });
@@ -236,6 +237,27 @@ export default class QueryClient<T> {
           headers: this.headers,
           data: body,
         });
+
+        resolve({
+          data,
+          status,
+          statusText,
+        });
+      } catch (error) {
+        resolve(this._error(error));
+      }
+    });
+  }
+
+  async count(): Promise<KontenbaseResponseCount> {
+    return new Promise(async (resolve, _reject) => {
+      try {
+        const { data, status, statusText } = await axios.get<KontenbaseCount>(
+          `${this.url}/count`,
+          {
+            headers: this.headers,
+          },
+        );
 
         resolve({
           data,

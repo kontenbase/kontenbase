@@ -6,6 +6,7 @@ interface AuthResponseBase {
 export interface AuthError {
   message: string;
 }
+
 export interface AuthResponseFailure extends AuthResponseBase {
   error?: AuthError;
   user?: null;

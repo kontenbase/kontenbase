@@ -18,7 +18,6 @@ export interface KontenbaseResponseFailure extends KontenbaseResponseBase {
 }
 
 interface Pagination {
-  count?: number | null;
   limit?: number | null;
   skip?: number | null;
 }
@@ -89,3 +88,16 @@ export type FindOption<T> = {
 export interface QueryClientOption {
   headers?: { [key: string]: string };
 }
+
+export interface KontenbaseCount {
+  count: number;
+}
+
+export interface KontenbaseResponseSuccessCount extends KontenbaseResponseBase {
+  data?: KontenbaseCount;
+  error?: null;
+}
+
+export type KontenbaseResponseCount =
+  | KontenbaseResponseSuccessCount
+  | KontenbaseResponseFailure;
