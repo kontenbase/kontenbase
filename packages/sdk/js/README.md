@@ -251,7 +251,15 @@ const { data, error } = await kontenbase
 ### Count
 
 ```js
+// count all records
 const { data, error } = await kontenbase.service('posts').count();
+```
+
+```js
+// count with filters
+const { data, error } = await kontenbase
+  .service('posts')
+  .count({ filterKey: filterValue, ... });
 ```
 
 ## Storage

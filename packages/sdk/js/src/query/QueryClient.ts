@@ -249,11 +249,12 @@ export default class QueryClient<T> {
     });
   }
 
-  async count(): Promise<KontenbaseResponseCount> {
+  async count(find?: FindOption<T>): Promise<KontenbaseResponseCount> {
     return new Promise(async (resolve, _reject) => {
       try {
+        const query = this._filter(find);
         const { data, status, statusText } = await axios.get<KontenbaseCount>(
-          `${this.url}/count`,
+          `${this.url}/count${query ? '?' + query : ''}`,
           {
             headers: this.headers,
           },
