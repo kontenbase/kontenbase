@@ -90,7 +90,7 @@ const { data, error } = await kontenbase
 ```
 
 ```js
-// Get record with filter:
+// Get record with filters:
 // select
 // lookup
 const { data, error } = await kontenbase

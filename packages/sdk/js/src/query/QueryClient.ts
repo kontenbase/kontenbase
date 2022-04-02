@@ -8,6 +8,7 @@ import {
   QueryClientOption,
   KontenbaseCount,
   KontenbaseResponseCount,
+  CountOption,
   GetByIdOption,
 } from './lib/types';
 
@@ -255,7 +256,7 @@ export default class QueryClient<T> {
     });
   }
 
-  async count(option?: FindOption<T>): Promise<KontenbaseResponseCount> {
+  async count(option?: CountOption<T>): Promise<KontenbaseResponseCount> {
     return new Promise(async (resolve, _reject) => {
       try {
         const query = this._filter(option);

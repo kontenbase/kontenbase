@@ -93,6 +93,11 @@ export type FindOption<T> = {
   or?: Array<Where<T>>;
 };
 
+export type CountOption<T> = {
+  where?: Where<T>;
+  or?: Array<Where<T>>;
+};
+
 export type GetByIdOption<T> = {
   select?: Array<keyof Partial<T>>;
   lookup?: Array<keyof Partial<T>> | Lookup | LookupGetId;
