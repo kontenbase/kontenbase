@@ -8,6 +8,7 @@ import {
   QueryClientOption,
   KontenbaseCount,
   KontenbaseResponseCount,
+  GetByIdOption,
 } from './lib/types';
 
 export default class QueryClient<T> {
@@ -112,11 +113,15 @@ export default class QueryClient<T> {
     });
   }
 
-  async getById(id: string): Promise<KontenbaseSingleResponse<T>> {
+  async getById(
+    id: string,
+    filter?: GetByIdOption<T>,
+  ): Promise<KontenbaseSingleResponse<T>> {
     return new Promise(async (resolve, _reject) => {
       try {
+        const query = this._filter(filter);
         const { data, status, statusText } = await axios.get<T>(
-          `${this.url}/${id}`,
+          `${this.url}/${id}${query ? '?' + query : ''}`,
           {
             headers: this.headers,
           },

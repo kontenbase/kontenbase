@@ -93,6 +93,11 @@ export type FindOption<T> = {
   or?: Array<Where<T>>;
 };
 
+export type GetByIdOption<T> = {
+  select?: Array<keyof Partial<T>>;
+  lookup?: Array<keyof Partial<T>> | Lookup | LookupGetId;
+};
+
 export interface QueryClientOption {
   headers?: { [key: string]: string };
 }
