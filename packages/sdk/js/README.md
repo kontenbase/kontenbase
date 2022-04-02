@@ -239,7 +239,7 @@ const { data, error } = await kontenbase
 ### Count
 
 ```js
-const { count, error } = await kontenbase.service('posts').count();
+const { data, error } = await kontenbase.service('posts').count();
 ```
 
 ## Storage
