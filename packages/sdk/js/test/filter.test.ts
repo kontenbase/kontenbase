@@ -65,12 +65,28 @@ describe('Filter', () => {
     expect(result).toBe('$select[0]=name');
   });
 
-  test('lookup', async () => {
+  test('lookup into multiple fields', async () => {
     const result = serviceProto._filter({
       lookup: ['name'],
     });
 
     expect(result).toBe('$lookup[0]=name');
+  });
+
+  test('lookup into all fields', async () => {
+    const result = serviceProto._filter({
+      lookup: '*',
+    });
+
+    expect(result).toBe('$lookup=*');
+  });
+
+  test('lookup but only show ids', async () => {
+    const result = serviceProto._filter({
+      lookup: { _id: '*' },
+    });
+
+    expect(result).toBe('$lookup[_id]=*');
   });
 
   test('$ne', async () => {

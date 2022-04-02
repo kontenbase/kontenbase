@@ -160,10 +160,22 @@ const { data, error } = await kontenbase
 ```
 
 ```js
-// lookup field link to record
+// lookup into multiple fields of link to record
 const { data, error } = await kontenbase
   .service('posts')
   .find({ lookup: ['categories'] });
+```
+
+```js
+// lookup to all fields of link to record
+const { data, error } = await kontenbase.service('posts').find({ lookup: '*' });
+```
+
+```js
+// lookup but only show the ids
+const { data, error } = await kontenbase
+  .service('posts')
+  .find({ lookup: { _id: '*' } });
 ```
 
 ```js

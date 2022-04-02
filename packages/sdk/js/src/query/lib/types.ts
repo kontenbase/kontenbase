@@ -42,6 +42,14 @@ enum Sort {
   DESC = -1,
 }
 
+enum Lookup {
+  ALL = '*',
+}
+
+interface LookupGetId {
+  _id: Lookup.ALL;
+}
+
 type Where<T> =
   | Partial<T>
   | {
@@ -81,7 +89,7 @@ export type FindOption<T> = {
   where?: Where<T>;
   sort?: { [P in keyof Partial<T>]: Sort | number };
   select?: Array<keyof Partial<T>>;
-  lookup?: Array<keyof Partial<T>>;
+  lookup?: Array<keyof Partial<T>> | Lookup | LookupGetId;
   or?: Array<Where<T>>;
 };
 
