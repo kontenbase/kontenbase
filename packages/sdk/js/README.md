@@ -167,7 +167,7 @@ const { data, error } = await kontenbase
 ```
 
 ```js
-// lookup to all fields of link to record
+// lookup into all fields of link to record
 const { data, error } = await kontenbase.service('posts').find({ lookup: '*' });
 ```
 
