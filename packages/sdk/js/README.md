@@ -89,6 +89,15 @@ const { data, error } = await kontenbase
   .getById('605a251d7b8678bf6811k3b1');
 ```
 
+```js
+// Get record with filter:
+// select
+// lookup
+const { data, error } = await kontenbase
+  .service('posts')
+  .getById('605a251d7b8678bf6811k3b1', { filterKey: filterValue, ... });
+```
+
 ### Update
 
 ```js

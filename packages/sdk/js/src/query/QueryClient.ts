@@ -44,43 +44,44 @@ export default class QueryClient<T> {
     };
   }
 
-  private _filter(find?: FindOption<T>): string {
+  private _filter(option?: FindOption<T>): string {
     let query = '';
-    if (find) {
+    if (option) {
       let filter: any = {};
-      if (find.skip) {
-        filter['$skip'] = find.skip;
-        delete find.skip;
-      }
-      if (find.limit) {
-        filter['$limit'] = find.limit;
-        delete find.limit;
+      if (option.skip) {
+        filter['$skip'] = option.skip;
+        delete option.skip;
       }
 
-      if (find.sort) {
-        filter['$sort'] = find.sort;
-        delete find.sort;
+      if (option.limit) {
+        filter['$limit'] = option.limit;
+        delete option.limit;
       }
 
-      if (find.select) {
-        filter['$select'] = find.select;
-        delete find.select;
+      if (option.sort) {
+        filter['$sort'] = option.sort;
+        delete option.sort;
       }
 
-      if (find.lookup) {
-        filter['$lookup'] = find.lookup;
-        delete find.lookup;
+      if (option.select) {
+        filter['$select'] = option.select;
+        delete option.select;
       }
 
-      if (find.or) {
-        filter['$or'] = find.or;
-        delete find.or;
+      if (option.lookup) {
+        filter['$lookup'] = option.lookup;
+        delete option.lookup;
       }
 
-      if (find.where) {
+      if (option.or) {
+        filter['$or'] = option.or;
+        delete option.or;
+      }
+
+      if (option.where) {
         filter = {
           ...filter,
-          ...find.where,
+          ...option.where,
         };
       }
 
@@ -89,10 +90,10 @@ export default class QueryClient<T> {
     return query;
   }
 
-  async find(find?: FindOption<T>): Promise<KontenbaseResponse<T>> {
+  async find(option?: FindOption<T>): Promise<KontenbaseResponse<T>> {
     return new Promise(async (resolve, _reject) => {
       try {
-        const query = this._filter(find);
+        const query = this._filter(option);
         const { data, status, statusText, headers } = await axios.get<T[]>(
           `${this.url}${query ? '?' + query : ''}`,
           {
@@ -115,11 +116,11 @@ export default class QueryClient<T> {
 
   async getById(
     id: string,
-    filter?: GetByIdOption<T>,
+    option?: GetByIdOption<T>,
   ): Promise<KontenbaseSingleResponse<T>> {
     return new Promise(async (resolve, _reject) => {
       try {
-        const query = this._filter(filter);
+        const query = this._filter(option);
         const { data, status, statusText } = await axios.get<T>(
           `${this.url}/${id}${query ? '?' + query : ''}`,
           {
@@ -254,10 +255,10 @@ export default class QueryClient<T> {
     });
   }
 
-  async count(find?: FindOption<T>): Promise<KontenbaseResponseCount> {
+  async count(option?: FindOption<T>): Promise<KontenbaseResponseCount> {
     return new Promise(async (resolve, _reject) => {
       try {
-        const query = this._filter(find);
+        const query = this._filter(option);
         const { data, status, statusText } = await axios.get<KontenbaseCount>(
           `${this.url}/count${query ? '?' + query : ''}`,
           {
