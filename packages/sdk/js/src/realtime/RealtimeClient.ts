@@ -62,8 +62,8 @@ export default class RealtimeClient {
           function (message: any) {
             callback?.({
               key,
-              event: message.result.data.data.eventType,
-              payload: message.result.data.data.payload,
+              event: message.data.eventType,
+              payload: message.data.payload,
             });
           },
         );
