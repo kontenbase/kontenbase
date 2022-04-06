@@ -34,3 +34,15 @@ export interface ProfileResponseSuccess<T> extends AuthResponseBase {
 export type ProfileResponse<T> =
   | ProfileResponseSuccess<T>
   | AuthResponseFailure;
+
+enum Lookup {
+  ALL = '*',
+}
+
+interface LookupGetId {
+  _id: Lookup.ALL;
+}
+
+export type GetUserOption<T> = {
+  lookup?: Array<keyof Partial<T>> | Lookup | LookupGetId;
+};

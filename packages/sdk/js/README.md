@@ -58,6 +58,14 @@ const { user, token, error } = await kontenbase.auth.login({
 const { user, error } = await kontenbase.auth.user();
 ```
 
+```js
+// Get user with filter:
+// lookup
+const { user, error } = await kontenbase
+  .auth
+  .user({ filterKey: filterValue, ... });
+```
+
 ### Update
 
 ```js

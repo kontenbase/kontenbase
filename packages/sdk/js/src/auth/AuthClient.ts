@@ -1,4 +1,5 @@
 import axios from 'axios';
+import qs from 'qs';
 import { STORAGE_KEY } from './lib/constants';
 import { isBrowser } from './lib/helpers';
 import {
@@ -6,6 +7,7 @@ import {
   AuthResponse,
   ProfileResponse,
   TokenResponse,
+  GetUserOption,
 } from './lib/types';
 
 export default class AuthClient {
@@ -46,6 +48,21 @@ export default class AuthClient {
       status: 500,
       statusText: 'FAILED',
     };
+  }
+
+  private _filter<T = any>(option?: GetUserOption<T>): string {
+    let query = '';
+    if (option) {
+      let filter: any = {};
+
+      if (option.lookup) {
+        filter['$lookup'] = option.lookup;
+        delete option.lookup;
+      }
+
+      query = qs.stringify(filter, { encode: false });
+    }
+    return query;
   }
 
   async login<T = any>(body: {
@@ -95,11 +112,12 @@ export default class AuthClient {
     });
   }
 
-  async user<T = any>(): Promise<ProfileResponse<T>> {
+  async user<T = any>(option?: GetUserOption<T>): Promise<ProfileResponse<T>> {
     return new Promise(async (resolve, _reject) => {
       try {
+        const query = this._filter(option);
         const { data, status, statusText } = await axios.get<T>(
-          `${this.url}/auth/user`,
+          `${this.url}/auth/user${query ? '?' + query : ''}`,
           {
             headers: this._headers(),
           },
