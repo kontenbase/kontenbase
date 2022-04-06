@@ -87,9 +87,9 @@ export type FindOption<T> = {
   limit?: number;
   skip?: number;
   where?: Where<T>;
-  sort?: { [P in keyof Partial<T>]: Sort | number };
+  sort?: { [P in keyof Partial<T>]: Sort.ASC | Sort.DESC };
   select?: Array<keyof Partial<T>>;
-  lookup?: Array<keyof Partial<T>> | Lookup | LookupGetId;
+  lookup?: Array<keyof Partial<T>> | Lookup.ALL | LookupGetId;
   or?: Array<Where<T>>;
 };
 
@@ -100,7 +100,7 @@ export type CountOption<T> = {
 
 export type GetByIdOption<T> = {
   select?: Array<keyof Partial<T>>;
-  lookup?: Array<keyof Partial<T>> | Lookup | LookupGetId;
+  lookup?: Array<keyof Partial<T>> | Lookup.ALL | LookupGetId;
 };
 
 export interface QueryClientOption {

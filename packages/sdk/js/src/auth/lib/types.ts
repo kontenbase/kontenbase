@@ -44,5 +44,5 @@ interface LookupGetId {
 }
 
 export type GetUserOption<T> = {
-  lookup?: Array<keyof Partial<T>> | Lookup | LookupGetId;
+  lookup?: Array<keyof Partial<T>> | Lookup.ALL | LookupGetId;
 };
