@@ -35,14 +35,10 @@ export type ProfileResponse<T> =
   | ProfileResponseSuccess<T>
   | AuthResponseFailure;
 
-export const enum Lookup {
-  ALL = '*',
-}
-
-interface LookupGetId {
-  _id: Lookup.ALL;
-}
+export type LookupGetId<T> = {
+  _id: Array<keyof Partial<T>> | '*';
+};
 
 export type GetUserOption<T> = {
-  lookup?: Array<keyof Partial<T>> | Lookup | LookupGetId;
+  lookup?: Array<keyof Partial<T>> | '*' | LookupGetId<T>;
 };

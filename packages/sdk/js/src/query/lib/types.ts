@@ -37,18 +37,9 @@ export type KontenbaseSingleResponse<T> =
   | KontenbaseSingleResponseSuccess<T>
   | KontenbaseResponseFailure;
 
-export const enum Sort {
-  ASC = 1,
-  DESC = -1,
-}
-
-export const enum Lookup {
-  ALL = '*',
-}
-
-interface LookupGetId {
-  _id: Lookup.ALL;
-}
+export type LookupGetId<T> = {
+  _id: Array<keyof Partial<T>> | '*';
+};
 
 type Where<T> =
   | Partial<T>
@@ -87,9 +78,9 @@ export type FindOption<T> = {
   limit?: number;
   skip?: number;
   where?: Where<T>;
-  sort?: { [P in keyof Partial<T>]: Sort };
+  sort?: { [P in keyof Partial<T>]: 1 | -1 };
   select?: Array<keyof Partial<T>>;
-  lookup?: Array<keyof Partial<T>> | Lookup | LookupGetId;
+  lookup?: Array<keyof Partial<T>> | '*' | LookupGetId<T>;
   or?: Array<Where<T>>;
 };
 
@@ -100,7 +91,7 @@ export type CountOption<T> = {
 
 export type GetByIdOption<T> = {
   select?: Array<keyof Partial<T>>;
-  lookup?: Array<keyof Partial<T>> | Lookup | LookupGetId;
+  lookup?: Array<keyof Partial<T>> | '*' | LookupGetId<T>;
 };
 
 export interface QueryClientOption {
