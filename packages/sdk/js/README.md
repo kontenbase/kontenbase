@@ -296,6 +296,8 @@ const { data, error } = await kontenbase.storage.upload(file);
 - `CREATE_RECORD`
 - `UPDATE_RECORD`
 - `DELETE_RECORD`
+- `LINK_RECORD`
+- `UNLINK_RECORD`
 
 ### Subscribe
 
