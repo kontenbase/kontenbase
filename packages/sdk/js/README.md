@@ -284,8 +284,18 @@ const { data, error } = await kontenbase
 ### Upload
 
 ```js
+// from client
 const file = event.target.files[0];
 const { data, error } = await kontenbase.storage.upload(file);
+```
+
+```js
+// from server
+const file = req.files[0];
+const { data, error } = await kontenbase.storage.upload(
+  file.buffer,
+  file.originalname,
+);
 ```
 
 ## Realtime

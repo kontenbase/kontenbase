@@ -60,11 +60,12 @@ export default class StorageClient {
       | ReadableStream<Uint8Array>
       | URLSearchParams
       | string,
+    fileName?: string,
   ): Promise<StorageSingleResponse> {
     return new Promise(async (resolve, _reject) => {
       try {
         const form = new FormData();
-        form.append('file', file);
+        form.append('file', file, fileName);
         let formHeaders = {};
         if (typeof form.getHeaders == 'function') {
           formHeaders = form.getHeaders();
