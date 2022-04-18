@@ -90,7 +90,13 @@ export default class AuthClient {
     });
   }
 
-  async register<T = any>(body: Partial<T>): Promise<AuthResponse<T>> {
+  async register<T = any>(body: {
+    firstName: string;
+    lastName?: string;
+    email: string;
+    password: string;
+    role?: string;
+  }): Promise<AuthResponse<T>> {
     return new Promise(async (resolve, _reject) => {
       try {
         const { data, status, statusText } = await axios.post<TokenResponse<T>>(
