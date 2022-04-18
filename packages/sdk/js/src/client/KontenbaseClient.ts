@@ -1,3 +1,5 @@
+import URL from 'url-parse';
+import { parseDomain, fromUrl, ParseResultListed } from 'parse-domain';
 import { QueryClient } from '..';
 import { AuthClient } from '../auth';
 import { RealtimeClient } from '../realtime';
@@ -17,11 +19,35 @@ export default class KontenbaseClient {
   protected headers: { [key: string]: string };
 
   constructor(options: KontenbaseClientOptions) {
-    if (!options?.apiKey) throw new Error('apiKey is required.');
+    if (!options?.apiKey) throw new Error('apiKey is required');
 
-    const url = options.url ? options.url : 'https://api.kontenbase.com';
+    let url = 'https://api.kontenbase.com';
+    let queryUrl = `${url}/query/api/v1/${options.apiKey}`;
 
-    this.queryUrl = `${url}/query/api/v1/${options.apiKey}`;
+    if (options.url) {
+      const { origin } = new URL(options.url);
+
+      if (origin !== url) {
+        const isDedicated = !origin.includes('api');
+
+        if (isDedicated) {
+          const { subDomains, domain } = parseDomain(
+            fromUrl(origin),
+          ) as ParseResultListed;
+
+          subDomains.splice(0, 1, 'api');
+          url = `https://${subDomains.join('.')}.${domain}.com`;
+        } else {
+          url = origin;
+        }
+
+        queryUrl = `${origin}${isDedicated ? '' : '/query'}/api/v1/${
+          options.apiKey
+        }`;
+      }
+    }
+
+    this.queryUrl = queryUrl;
     this.realtimeUrl = `${url}/stream`;
     this.apiKey = options.apiKey;
     this.headers = {};

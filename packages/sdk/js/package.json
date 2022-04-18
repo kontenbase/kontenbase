@@ -28,6 +28,7 @@
     "@types/jest": "^27.4.1",
     "@types/node-fetch": "^3.0.3",
     "@types/qs": "^6.9.7",
+    "@types/url-parse": "^1.4.8",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
     "dotenv": "^10.0.0",
@@ -44,7 +45,9 @@
     "centrifuge": "^2.8.4",
     "isomorphic-form-data": "^2.0.0",
     "isomorphic-ws": "^4.0.1",
+    "parse-domain": "^7.0.0",
     "qs": "^6.10.2",
+    "url-parse": "^1.5.10",
     "ws": "^8.5.0"
   },
   "jsdelivr": "dist/umd/kontenbase.js",
