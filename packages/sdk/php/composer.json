@@ -1,0 +1,32 @@
+{
+  "name": "kontenbase/kontenbase-sdk-php",
+  "description": "Kontenbase SDK for PHP",
+  "type": "library",
+  "keywords": [],
+  "license": "MIT",
+  "homepage": "https://kontenbase.com",
+  "authors": [
+    {
+      "name": "Kontenbase",
+      "homepage": "https://kontenbase.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Kontenbase\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Kontenbase\\Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "guzzlehttp/guzzle": "^7.4"
+  }
+}
