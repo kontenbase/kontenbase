@@ -1,5 +1,5 @@
 {
-  "name": "kontenbase/kontenbase-sdk-php",
+  "name": "kontenbase/sdk",
   "description": "Kontenbase SDK for PHP",
   "type": "library",
   "keywords": [],
@@ -11,6 +11,9 @@
       "homepage": "https://kontenbase.com"
     }
   ],
+  "scripts": {
+    "test": "phpunit tests"
+  },
   "autoload": {
     "psr-4": {
       "Kontenbase\\": "src/"
@@ -21,12 +24,12 @@
       "Kontenbase\\Tests\\": "tests/"
     }
   },
+  "require": {
+    "guzzlehttp/guzzle": "^7.4"
+  },
   "require-dev": {
     "phpunit/phpunit": "^9"
   },
   "minimum-stability": "dev",
-  "prefer-stable": true,
-  "require": {
-    "guzzlehttp/guzzle": "^7.4"
-  }
+  "prefer-stable": true
 }
