@@ -21,7 +21,7 @@ class QueryClient
     ]);
   }
 
-  private function _filter($options)
+  private function _filter($options): array
   {
     $filter = [];
 

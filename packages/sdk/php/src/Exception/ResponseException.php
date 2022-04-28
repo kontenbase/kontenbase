@@ -6,7 +6,7 @@ use GuzzleHttp\Exception\BadResponseException;
 
 class ResponseException
 {
-  public static function _error($exception)
+  public static function _error($exception): array
   {
     if ($exception instanceof BadResponseException) {
       $error = $exception->getResponse();

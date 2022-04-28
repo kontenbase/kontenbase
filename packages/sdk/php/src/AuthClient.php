@@ -140,6 +140,7 @@ class AuthClient
 
       return [
         'user' => $data['user'],
+        'token' => $data['token'],
         'status' => $response->getStatusCode(),
         'statusText' => $response->getReasonPhrase()
       ];

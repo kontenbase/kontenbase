@@ -41,14 +41,14 @@ class KontenbaseClient
     return $headers;
   }
 
-  private function _initAuth()
+  private function _initAuth(): AuthClient
   {
     return new AuthClient($this->queryUrl, [
       "headers" => $this->headers
     ]);
   }
 
-  public function service($name)
+  public function service($name): QueryClient
   {
     return new QueryClient("$this->queryUrl/$name", [
       'headers' => $this->_getHeaders()
