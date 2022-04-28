@@ -14,6 +14,7 @@
   "config": {
     "vendor-dir": "packages/sdk/php/vendor"
   },
+  "readme": "packages/sdk/php/README.md",
   "scripts": {
     "test": "phpunit packages/sdk/php/tests"
   },
