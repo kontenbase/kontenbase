@@ -11,17 +11,20 @@
       "homepage": "https://kontenbase.com"
     }
   ],
+  "config": {
+    "vendor-dir": "packages/sdk/php/vendor"
+  },
   "scripts": {
-    "test": "phpunit tests"
+    "test": "phpunit packages/sdk/php/tests"
   },
   "autoload": {
     "psr-4": {
-      "Kontenbase\\": "src/"
+      "Kontenbase\\": "packages/sdk/php/src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Kontenbase\\Tests\\": "tests/"
+      "Kontenbase\\Tests\\": "packages/sdk/php/tests/"
     }
   },
   "require": {
