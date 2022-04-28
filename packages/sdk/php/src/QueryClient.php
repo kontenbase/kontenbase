@@ -93,6 +93,10 @@ class QueryClient
   public function create(array $body)
   {
     try {
+      if (sizeof($body) == 0) {
+        throw new \Exception('body cannot be empty');
+      }
+
       $response = $this->httpClient->post("$this->url", ['json' => $body]);
 
       return [

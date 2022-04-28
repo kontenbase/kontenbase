@@ -2,7 +2,6 @@
 
 namespace Kontenbase;
 
-use Error;
 use Kontenbase\AuthClient;
 use Kontenbase\QueryClient;
 use Kontenbase\StorageClient;
@@ -16,10 +15,10 @@ class KontenbaseClient
   protected $queryUrl;
   protected $headers;
 
-  public function __construct(array $options = [])
+  public function __construct(array $options)
   {
     if (!isset($options["apiKey"])) {
-      throw new Error("apiKey is required.");
+      throw new \Exception("apiKey is required.");
     }
 
     $url = isset($options["url"]) ? $options["url"] : 'https://api.kontenbase.com';
