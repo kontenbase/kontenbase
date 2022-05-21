@@ -31,9 +31,6 @@ func NewHTTPClient(baseUrl string, headers map[string]string) *HTTPClient {
 func (h *HTTPClient) sendRequest(method string, url string, body io.Reader, headers map[string]string) (*HTTPResponse, *KontenbaseError) {
 	client := http.Client{}
 
-	j, _ := json.Marshal(h.baseUrl + url)
-	fmt.Println(string(j))
-
 	req, err := http.NewRequest(method, h.baseUrl+url, body)
 	if err != nil {
 		return nil, internalError(err.Error())
