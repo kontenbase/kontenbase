@@ -21,9 +21,9 @@ class KontenbaseClient
       throw new \Exception("apiKey is required.");
     }
 
-    $url = isset($options["url"]) ? $options["url"] : 'https://api.kontenbase.com';
+    $url = isset($options["url"]) ? $options["url"] : 'https://api.kontenbase.com/query/api/v1';
 
-    $this->queryUrl = "$url/query/api/v1/{$options['apiKey']}";
+    $this->queryUrl = "$url/{$options['apiKey']}";
     $this->apiKey = $options["apiKey"];
     $this->headers = array();
     $this->auth = $this->_initAuth();
