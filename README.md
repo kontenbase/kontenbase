@@ -42,6 +42,12 @@ Kontenbase let you focus on the frontend and product for your end user.
 - [ ] Functions (coming soon)
 - [ ] Internal Tools (coming soon)
 
+Provides SDK with various language supports.
+
+- [Javascript](./js/README.md)
+- [PHP](https://github.com/kontenbase/kontenbase-php/blob/main/README.md)
+- [Go](https://github.com/kontenbase/kontenbase-go/blob/main/README.md)
+
 ## Documentation
 
 Visit our documentation at [docs.kontenbase.com](https://docs.kontenbase.com)
@@ -55,7 +61,7 @@ Visit our documentation at [docs.kontenbase.com](https://docs.kontenbase.com)
 ## Status
 
 - [x] Private Alpha: We are testing Kontenbase with a limited users. You can subscribe and fill our survey via [kontenbase.com](https://kontenbase.com) to be invited.
-- [ ] Public Alpha: Anyone can sign up without any invite. It might be buggy, so please go easy. :)
+- [x] Public Alpha: Anyone can sign up without any invite. It might be buggy, so please go easy. :)
 - [ ] Public Beta: Stable enough to be used by anyone.
 - [ ] Public: Production ready which you can use for real project and product.
 
