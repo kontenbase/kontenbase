@@ -1,5 +1,5 @@
 export interface Storage {
-  id: string;
+  _id: string;
   fileName: string;
   mimeType: string;
   size: number;
