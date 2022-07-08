@@ -94,7 +94,7 @@ const Chat = () => {
         type: 'text',
         position: isCreated ? 'right' : 'left'
       }
-    })
+    }).reverse()
   }, [chats, user])
 
   return (
