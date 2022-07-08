@@ -80,8 +80,8 @@ export default function AppBar({ user, isPublic }: Props) {
             </Menu.Button>
             <Menu.Items className="menu-items">
               <div className="arrow" />
-              <Menu.Item onClick={handleLogout}>
-                <button className="menu-item logout-button">
+              <Menu.Item>
+                <button onClick={handleLogout} className="menu-item logout-button" >
                   <svg
                     width="16"
                     height="17"
