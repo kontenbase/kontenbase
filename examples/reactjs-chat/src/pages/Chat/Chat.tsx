@@ -7,7 +7,6 @@ import kontenbase from '../../lib/kontenbase'
 import 'react-chat-elements/dist/main.css'
 import './Chat.css'
 import ChatType from '../../types/Chat'
-import { Sort } from '@kontenbase/sdk'
 import AppBar from '../../components/AppBar'
 
 const SERVICE_NAME = 'chats'
