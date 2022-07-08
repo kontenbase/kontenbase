@@ -30,7 +30,9 @@ const Chat = () => {
   }
 
   const getChats = async () => {
-    const { data, error } = await kontenbase.service<ChatType>(SERVICE_NAME).find()
+    const { data, error } = await kontenbase.service<ChatType>(SERVICE_NAME).find({
+      sort: { createdAt: -1 },
+    })
 
     if (error) {
       alert(error.message)
