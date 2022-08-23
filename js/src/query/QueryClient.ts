@@ -277,4 +277,25 @@ export default class QueryClient<T> {
       }
     });
   }
+
+  async fields(): Promise<KontenbaseResponse<T>> {
+    return new Promise(async (resolve, _reject) => {
+      try {
+        const { data, status, statusText } = await axios.get<T[]>(
+          `${this.url}/fields`,
+          {
+            headers: this.headers,
+          },
+        );
+
+        resolve({
+          data,
+          status,
+          statusText,
+        });
+      } catch (error) {
+        resolve(this._error(error))
+      }
+    })
+  }
 }

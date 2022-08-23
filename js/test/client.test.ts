@@ -185,6 +185,13 @@ describe('Client', () => {
     expect(response.status).toBe(200);
   });
 
+  test('fields', async () => {
+    const response = await kontenbase.service(SERVICE_NAME).fields()
+    console.log(response)
+
+    expect(response.status).toBe(200)
+  })
+
   test('realtime', async () => {
     const key = await kontenbase.realtime.subscribe<Todo>(
       SERVICE_NAME,
