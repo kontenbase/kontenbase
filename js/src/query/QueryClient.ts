@@ -25,8 +25,8 @@ export default class QueryClient<T> {
     if (axios.isAxiosError(error) && error.response) {
       return {
         error: {
-          message: error.response.data?.message
-            ? error.response.data.message
+          message: (error.response.data as any)?.message
+            ? (error.response.data as any).message
             : typeof error.response.data === 'object'
             ? JSON.stringify(error.response.data)
             : String(error.response.data),
@@ -294,8 +294,8 @@ export default class QueryClient<T> {
           statusText,
         });
       } catch (error) {
-        resolve(this._error(error))
+        resolve(this._error(error));
       }
-    })
+    });
   }
 }

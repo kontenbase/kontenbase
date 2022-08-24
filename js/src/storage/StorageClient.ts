@@ -20,8 +20,8 @@ export default class StorageClient {
     if (axios.isAxiosError(error) && error.response) {
       return {
         error: {
-          message: error.response.data?.message
-            ? error.response.data.message
+          message: (error.response.data as any)?.message
+            ? (error.response.data as any).message
             : typeof error.response.data === 'object'
             ? JSON.stringify(error.response.data)
             : String(error.response.data),
