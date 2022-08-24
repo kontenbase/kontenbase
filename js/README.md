@@ -339,6 +339,13 @@ const key = await kontenbase.realtime.subscribe(
 kontenbase.realtime.unsubscribe(key);
 ```
 
+### Find fields
+
+```js
+// Find all created fields in the service
+const { data, error } = await kontenbase.service('posts').fields();
+```
+
 ## CDN
 
 You can now use plain `<script>`s to import kontenbase from CDNs, like:
