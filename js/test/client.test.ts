@@ -9,8 +9,8 @@ const SECOND_SERVICE_NAME = process.env.SECOND_SERVICE_NAME || 'categories';
 const EMAIL = process.env.EMAIL || '';
 const PASSWORD = process.env.PASSWORD || '';
 const kontenbase = new KontenbaseClient({
-  url: URL,
-  apiKey: API_KEY,
+  // url: URL,
+  apiKey: "7864d95f-5e1e-4536-af5c-b50b1e247b13",
 });
 
 interface Todo {
@@ -186,7 +186,7 @@ describe('Client', () => {
   });
 
   test('fields', async () => {
-    const response = await kontenbase.service(SERVICE_NAME).fields()
+    const response = await kontenbase.service(SERVICE_NAME).field.find()
     console.log(response)
 
     expect(response.status).toBe(200)
@@ -211,3 +211,65 @@ test('count', async () => {
 
   expect(response.status).toBe(200);
 });
+
+describe('field', async () => {
+  let id: string;
+
+  const login = () => {
+    return kontenbase.auth.login<User>({
+      email: EMAIL,
+      password: PASSWORD,
+    });
+  };
+
+  beforeEach(async () => {
+    await login();
+    return true;
+  });
+
+  test('create', async () => {
+    const response = await kontenbase
+      .service(SERVICE_NAME)
+      .field.create({
+        name: "new field",
+        config: {
+          type: "singleLineText",
+          typeOptions: {}
+        }
+      });
+    id = response.data?.id || '';
+
+    expect(response.status).toBe(200);
+  });
+
+  test('find', async () => {
+    const response = await kontenbase.service(SERVICE_NAME).field.find();
+
+    expect(response.status).toBe(200);
+  });
+
+  test('updateName', async () => {
+    const newName = "new name"
+    const response = await kontenbase.service(SERVICE_NAME).field.updateName(id, { name: newName });
+
+    expect(response.status).toBe(200);
+    expect(response.data.name).toBe(newName)
+  });
+
+  test('updateOptions', async () => {
+    const response = await kontenbase.service(SERVICE_NAME).field.updateOptions(id, {
+      type: "longText",
+      typeOptions: {}
+    });
+
+    expect(response.status).toBe(200);
+    expect(response.data.type).toBe('longText')
+  });
+
+  test('delete', async () => {
+    const response = await kontenbase.service(SERVICE_NAME).field.delete(id);
+
+    expect(response.status).toBe(200);
+  });
+
+})
