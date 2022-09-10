@@ -4,16 +4,16 @@ import {
   FieldResponse,
   FieldResponseFailure,
   FieldSingleResponse,
-  FieldOptions
-} from './lib/types'
+  FieldOptions,
+} from './lib/types';
 
 export default class FieldClient<T> {
   protected url: string;
   protected headers: { [key: string]: string };
 
   constructor(url: string, options: any) {
-    this.url = url
-    this.headers = { ...options.headers }
+    this.url = url;
+    this.headers = { ...options.headers };
   }
 
   private _error(error: any): FieldResponseFailure {
@@ -58,12 +58,12 @@ export default class FieldClient<T> {
       } catch (error) {
         resolve(this._error(error));
       }
-    })
+    });
   }
 
   async create(body: {
-    name: string,
-    config: FieldOptions<T>,
+    name: string;
+    config: FieldOptions<T>;
   }): Promise<FieldSingleResponse<T>> {
     return new Promise(async (resolve, _reject) => {
       try {
@@ -83,13 +83,13 @@ export default class FieldClient<T> {
       } catch (error) {
         resolve(this._error(error));
       }
-    })
+    });
   }
-  
+
   async updateName(
     id: string,
     body: {
-      name: string,
+      name: string;
     },
   ): Promise<FieldSingleResponse<T>> {
     return new Promise(async (resolve, _reject) => {
@@ -110,7 +110,7 @@ export default class FieldClient<T> {
       } catch (error) {
         resolve(this._error(error));
       }
-    })
+    });
   }
 
   async updateOptions(
@@ -135,7 +135,7 @@ export default class FieldClient<T> {
       } catch (error) {
         resolve(this._error(error));
       }
-    })
+    });
   }
 
   async delete(id: string): Promise<FieldSingleResponse<T>> {
@@ -156,6 +156,6 @@ export default class FieldClient<T> {
       } catch (error) {
         resolve(this._error(error));
       }
-    })
+    });
   }
 }

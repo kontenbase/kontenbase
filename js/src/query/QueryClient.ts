@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-import { FieldClient} from '../field';
+import { FieldClient } from '../field';
 import {
   KontenbaseResponse,
   KontenbaseResponseFailure,
@@ -22,7 +22,7 @@ export default class QueryClient<T> {
   constructor(url: string, options: QueryClientOption) {
     this.url = url;
     this.headers = { ...options.headers };
-    this.field = new FieldClient<T>(`${url}/fields`, options)
+    this.field = new FieldClient<T>(`${url}/fields`, options);
   }
 
   private _error(error: any): KontenbaseResponseFailure {

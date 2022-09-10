@@ -9,8 +9,8 @@ const SECOND_SERVICE_NAME = process.env.SECOND_SERVICE_NAME || 'categories';
 const EMAIL = process.env.EMAIL || '';
 const PASSWORD = process.env.PASSWORD || '';
 const kontenbase = new KontenbaseClient({
-  // url: URL,
-  apiKey: "7864d95f-5e1e-4536-af5c-b50b1e247b13",
+  url: URL,
+  apiKey: API_KEY,
 });
 
 interface Todo {
@@ -186,11 +186,11 @@ describe('Client', () => {
   });
 
   test('fields', async () => {
-    const response = await kontenbase.service(SERVICE_NAME).field.find()
-    console.log(response)
+    const response = await kontenbase.service(SERVICE_NAME).field.find();
+    console.log(response);
 
-    expect(response.status).toBe(200)
-  })
+    expect(response.status).toBe(200);
+  });
 
   test('realtime', async () => {
     const key = await kontenbase.realtime.subscribe<Todo>(
@@ -228,15 +228,13 @@ describe('field', async () => {
   });
 
   test('create', async () => {
-    const response = await kontenbase
-      .service(SERVICE_NAME)
-      .field.create({
-        name: "new field",
-        config: {
-          type: "singleLineText",
-          typeOptions: {}
-        }
-      });
+    const response = await kontenbase.service(SERVICE_NAME).field.create({
+      name: 'new field',
+      config: {
+        type: 'singleLineText',
+        typeOptions: {},
+      },
+    });
     id = response.data?.id || '';
 
     expect(response.status).toBe(200);
@@ -249,21 +247,25 @@ describe('field', async () => {
   });
 
   test('updateName', async () => {
-    const newName = "new name"
-    const response = await kontenbase.service(SERVICE_NAME).field.updateName(id, { name: newName });
+    const newName = 'new name';
+    const response = await kontenbase
+      .service(SERVICE_NAME)
+      .field.updateName(id, { name: newName });
 
     expect(response.status).toBe(200);
-    expect(response.data.name).toBe(newName)
+    expect(response.data?.name).toBe(newName);
   });
 
   test('updateOptions', async () => {
-    const response = await kontenbase.service(SERVICE_NAME).field.updateOptions(id, {
-      type: "longText",
-      typeOptions: {}
-    });
+    const response = await kontenbase
+      .service(SERVICE_NAME)
+      .field.updateOptions(id, {
+        type: 'longText',
+        typeOptions: {},
+      });
 
     expect(response.status).toBe(200);
-    expect(response.data.type).toBe('longText')
+    expect(response.data?.type).toBe('longText');
   });
 
   test('delete', async () => {
@@ -271,5 +273,4 @@ describe('field', async () => {
 
     expect(response.status).toBe(200);
   });
-
-})
+});
