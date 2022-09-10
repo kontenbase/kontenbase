@@ -340,6 +340,16 @@ kontenbase.realtime.unsubscribe(key);
 ```
 
 ## Fields
+```js
+// Create a new field
+const { data, error } = await kontenbase.service('posts').field.create({
+  name: 'new field',
+  config: {
+    type: 'singleLineText',
+    typeOptions: {},
+  }
+})
+```
 
 ```js
 // Find all fields
