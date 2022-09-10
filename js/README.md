@@ -339,11 +339,30 @@ const key = await kontenbase.realtime.subscribe(
 kontenbase.realtime.unsubscribe(key);
 ```
 
-### Find fields
+## Fields
 
 ```js
-// Find all created fields in the service
-const { data, error } = await kontenbase.service('posts').fields();
+// Find all fields
+const { data, error } = await kontenbase.service('posts').field.find();
+```
+
+```js
+// Update name of the field
+const { data, error } = await kontenbase
+  .service('posts')
+  .field.updateName(id, { name: 'new name' });
+```
+
+```js
+// Update options of the field
+const { data, error } = await kontenbase
+  .service('posts')
+  .field.updateOptions(id, { type: 'longText', typeOptions: {} });
+```
+
+```js
+// Delete field
+const { data, error } = await kontenbase.service('posts').field.delete(id);
 ```
 
 ## CDN

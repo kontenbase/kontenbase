@@ -186,11 +186,11 @@ describe('Client', () => {
   });
 
   test('fields', async () => {
-    const response = await kontenbase.service(SERVICE_NAME).fields()
-    console.log(response)
+    const response = await kontenbase.service(SERVICE_NAME).field.find();
+    console.log(response);
 
-    expect(response.status).toBe(200)
-  })
+    expect(response.status).toBe(200);
+  });
 
   test('realtime', async () => {
     const key = await kontenbase.realtime.subscribe<Todo>(
@@ -210,4 +210,67 @@ test('count', async () => {
   const response = await kontenbase.service<Todo>(SERVICE_NAME).count();
 
   expect(response.status).toBe(200);
+});
+
+describe('field', async () => {
+  let id: string;
+
+  const login = () => {
+    return kontenbase.auth.login<User>({
+      email: EMAIL,
+      password: PASSWORD,
+    });
+  };
+
+  beforeEach(async () => {
+    await login();
+    return true;
+  });
+
+  test('create', async () => {
+    const response = await kontenbase.service(SERVICE_NAME).field.create({
+      name: 'new field',
+      config: {
+        type: 'singleLineText',
+        typeOptions: {},
+      },
+    });
+    id = response.data?.id || '';
+
+    expect(response.status).toBe(200);
+  });
+
+  test('find', async () => {
+    const response = await kontenbase.service(SERVICE_NAME).field.find();
+
+    expect(response.status).toBe(200);
+  });
+
+  test('updateName', async () => {
+    const newName = 'new name';
+    const response = await kontenbase
+      .service(SERVICE_NAME)
+      .field.updateName(id, { name: newName });
+
+    expect(response.status).toBe(200);
+    expect(response.data?.name).toBe(newName);
+  });
+
+  test('updateOptions', async () => {
+    const response = await kontenbase
+      .service(SERVICE_NAME)
+      .field.updateOptions(id, {
+        type: 'longText',
+        typeOptions: {},
+      });
+
+    expect(response.status).toBe(200);
+    expect(response.data?.type).toBe('longText');
+  });
+
+  test('delete', async () => {
+    const response = await kontenbase.service(SERVICE_NAME).field.delete(id);
+
+    expect(response.status).toBe(200);
+  });
 });
