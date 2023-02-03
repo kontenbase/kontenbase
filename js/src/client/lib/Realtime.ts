@@ -24,7 +24,7 @@ export default class Realtime {
       {
         where: option?.where,
         event: option?.event,
-        token: option.token ? option?.token : this._auth.token(),
+        token: option?.token ?? this._auth.token(),
       },
       callback,
     );
