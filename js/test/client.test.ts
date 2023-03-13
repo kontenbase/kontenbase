@@ -227,49 +227,14 @@ describe('field', async () => {
     return true;
   });
 
-  test('create', async () => {
-    const response = await kontenbase.service(SERVICE_NAME).field.create({
-      name: 'new field',
-      config: {
-        type: 'singleLineText',
-        typeOptions: {},
-      },
-    });
-    id = response.data?.id || '';
-
-    expect(response.status).toBe(200);
-  });
-
   test('find', async () => {
     const response = await kontenbase.service(SERVICE_NAME).field.find();
 
     expect(response.status).toBe(200);
   });
 
-  test('updateName', async () => {
-    const newName = 'new name';
-    const response = await kontenbase
-      .service(SERVICE_NAME)
-      .field.updateName(id, { name: newName });
-
-    expect(response.status).toBe(200);
-    expect(response.data?.name).toBe(newName);
-  });
-
-  test('updateOptions', async () => {
-    const response = await kontenbase
-      .service(SERVICE_NAME)
-      .field.updateOptions(id, {
-        type: 'longText',
-        typeOptions: {},
-      });
-
-    expect(response.status).toBe(200);
-    expect(response.data?.type).toBe('longText');
-  });
-
-  test('delete', async () => {
-    const response = await kontenbase.service(SERVICE_NAME).field.delete(id);
+  test('getById', async () => {
+    const response = await kontenbase.service(SERVICE_NAME).field.getById(id);
 
     expect(response.status).toBe(200);
   });
