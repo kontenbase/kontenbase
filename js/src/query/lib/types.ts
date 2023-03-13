@@ -41,6 +41,10 @@ export type LookupGetId<T> = {
   _id: Array<keyof Partial<T>> | '*';
 };
 
+export type LookupGetAll<T> = {
+  '*': Array<keyof Partial<T>> | '*';
+};
+
 type Where<T> =
   | Partial<T>
   | {
@@ -80,7 +84,7 @@ export type FindOption<T> = {
   where?: Where<T>;
   sort?: { [P in keyof Partial<T>]: 1 | -1 };
   select?: Array<keyof Partial<T>>;
-  lookup?: Array<keyof Partial<T>> | '*' | LookupGetId<T>;
+  lookup?: Array<keyof Partial<T>> | '*' | LookupGetId<T> | LookupGetAll<T>;
   or?: Array<Where<T>>;
 };
 

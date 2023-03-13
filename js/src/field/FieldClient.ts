@@ -61,87 +61,10 @@ export default class FieldClient<T> {
     });
   }
 
-  async create(body: {
-    name: string;
-    config: FieldOptions<T>;
-  }): Promise<FieldSingleResponse<T>> {
+  async getById(id: string): Promise<FieldSingleResponse<T>> {
     return new Promise(async (resolve, _reject) => {
       try {
-        const { data, status, statusText } = await axios.post<Field<T>>(
-          this.url,
-          body,
-          {
-            headers: this.headers,
-          },
-        );
-
-        resolve({
-          data,
-          status,
-          statusText,
-        });
-      } catch (error) {
-        resolve(this._error(error));
-      }
-    });
-  }
-
-  async updateName(
-    id: string,
-    body: {
-      name: string;
-    },
-  ): Promise<FieldSingleResponse<T>> {
-    return new Promise(async (resolve, _reject) => {
-      try {
-        const { data, status, statusText } = await axios.patch<Field<T>>(
-          `${this.url}/${id}/name`,
-          body,
-          {
-            headers: this.headers,
-          },
-        );
-
-        resolve({
-          data,
-          status,
-          statusText,
-        });
-      } catch (error) {
-        resolve(this._error(error));
-      }
-    });
-  }
-
-  async updateOptions(
-    id: string,
-    body: FieldOptions<T>,
-  ): Promise<FieldSingleResponse<T>> {
-    return new Promise(async (resolve, _reject) => {
-      try {
-        const { data, status, statusText } = await axios.patch<Field<T>>(
-          `${this.url}/${id}/options`,
-          body,
-          {
-            headers: this.headers,
-          },
-        );
-
-        resolve({
-          data,
-          status,
-          statusText,
-        });
-      } catch (error) {
-        resolve(this._error(error));
-      }
-    });
-  }
-
-  async delete(id: string): Promise<FieldSingleResponse<T>> {
-    return new Promise(async (resolve, _reject) => {
-      try {
-        const { data, status, statusText } = await axios.delete<Field<T>>(
+        const { data, status, statusText } = await axios.get<Field<T>>(
           `${this.url}/${id}`,
           {
             headers: this.headers,

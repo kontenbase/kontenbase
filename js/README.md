@@ -177,22 +177,29 @@ const { data, error } = await kontenbase
 ```
 
 ```js
-// lookup into multiple fields of link to record
+// lookup into multiple link to record fields
 const { data, error } = await kontenbase
   .service('posts')
   .find({ lookup: ['categories'] });
 ```
 
 ```js
-// lookup into all fields of link to record
+// lookup into all link to record fields
 const { data, error } = await kontenbase.service('posts').find({ lookup: '*' });
 ```
 
 ```js
-// lookup but only show the ids
+// lookup into all link to record fields but only show the ids
 const { data, error } = await kontenbase
   .service('posts')
   .find({ lookup: { _id: '*' } });
+```
+
+```js
+// lookup into all link to record fields and show all data
+const { data, error } = await kontenbase
+  .service('posts')
+  .find({ lookup: { '*': '*' } });
 ```
 
 ```js
@@ -339,40 +346,20 @@ const key = await kontenbase.realtime.subscribe(
 kontenbase.realtime.unsubscribe(key);
 ```
 
-## Fields
-```js
-// Create a new field
-const { data, error } = await kontenbase.service('posts').field.create({
-  name: 'new field',
-  config: {
-    type: 'singleLineText',
-    typeOptions: {},
-  }
-})
-```
+## Field
+
+### Find
 
 ```js
-// Find all fields
 const { data, error } = await kontenbase.service('posts').field.find();
 ```
 
-```js
-// Update name of the field
-const { data, error } = await kontenbase
-  .service('posts')
-  .field.updateName(id, { name: 'new name' });
-```
+### Get
 
 ```js
-// Update options of the field
 const { data, error } = await kontenbase
   .service('posts')
-  .field.updateOptions(id, { type: 'longText', typeOptions: {} });
-```
-
-```js
-// Delete field
-const { data, error } = await kontenbase.service('posts').field.delete(id);
+  .field.getById('605a251d7b8678bf6811k3b1');
 ```
 
 ## CDN
