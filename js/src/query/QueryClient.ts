@@ -19,10 +19,13 @@ export default class QueryClient<T> {
 
   public field: FieldClient<T>;
 
-  constructor(url: string, options: QueryClientOption) {
-    this.url = url;
+  constructor(tableName: string, options: QueryClientOption) {
+    this.url = `${options.url}/${tableName}`;
     this.headers = { ...options.headers };
-    this.field = new FieldClient<T>(`${url}/fields`, options);
+    this.field = new FieldClient<T>(
+      `${options.url}/tables/${tableName}`,
+      options,
+    );
   }
 
   private _error(error: any): KontenbaseResponseFailure {

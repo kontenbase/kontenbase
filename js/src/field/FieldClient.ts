@@ -1,18 +1,18 @@
 import axios from 'axios';
 import {
   Field,
+  FieldClientOption,
   FieldResponse,
   FieldResponseFailure,
   FieldSingleResponse,
-  FieldOptions,
 } from './lib/types';
 
 export default class FieldClient<T> {
   protected url: string;
   protected headers: { [key: string]: string };
 
-  constructor(url: string, options: any) {
-    this.url = url;
+  constructor(url: string, options: FieldClientOption) {
+    this.url = `${url}/fields`;
     this.headers = { ...options.headers };
   }
 

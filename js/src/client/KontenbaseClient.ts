@@ -80,8 +80,9 @@ export default class KontenbaseClient {
     });
   }
 
-  service<T = any>(name: string): QueryClient<T> {
-    return new QueryClient<T>(`${this.queryUrl}/${name}`, {
+  service<T = any>(tableName: string): QueryClient<T> {
+    return new QueryClient<T>(tableName, {
+      url: this.queryUrl,
       headers: this._getHeaders(),
     });
   }

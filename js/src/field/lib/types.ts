@@ -11,14 +11,6 @@ export interface Field<T> {
   defaultValue: T;
 }
 
-export interface FieldOptions<T> {
-  type: string;
-  typeOptions: { [key: string]: T };
-  isRequired?: boolean;
-  isUnique?: boolean;
-  defaultValue?: T;
-}
-
 interface FieldResponseBase {
   status: number;
   statusText: string;
@@ -48,3 +40,7 @@ export interface FieldSingleResponseSuccess<T> extends FieldResponseBase {
 export type FieldSingleResponse<T> =
   | FieldSingleResponseSuccess<T>
   | FieldResponseFailure;
+
+export interface FieldClientOption {
+  headers?: { [key: string]: string };
+}
