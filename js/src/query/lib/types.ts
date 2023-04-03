@@ -95,7 +95,7 @@ export type CountOption<T> = {
 
 export type GetByIdOption<T> = {
   select?: Array<keyof Partial<T>>;
-  lookup?: Array<keyof Partial<T>> | '*' | LookupGetId<T>;
+  lookup?: Array<keyof Partial<T>> | '*' | LookupGetId<T> | LookupGetAll<T>;
 };
 
 export interface QueryClientOption {

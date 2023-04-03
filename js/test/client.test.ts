@@ -19,6 +19,12 @@ interface Todo {
   categories: [string];
 }
 
+interface Categories {
+  _id: string;
+  name: string;
+  todos: [string];
+}
+
 interface User {
   _id: string;
   email: string;
@@ -30,14 +36,13 @@ test('it should create the client connection', async () => {
 });
 
 test('it should throw an error if no valid params are provided', async () => {
-  expect(() => createClient({ apiKey: '' })).toThrowError(
-    'apiKey is required.',
-  );
+  expect(() => createClient({ apiKey: '' })).toThrowError('apiKey is required');
 });
 
 describe('Client', () => {
   let id: string;
   let secondId: string;
+  let ids: string[];
 
   const login = () => {
     return kontenbase.auth.login<User>({
@@ -104,17 +109,26 @@ describe('Client', () => {
     const response = await kontenbase
       .service<Todo>(SERVICE_NAME)
       .create({ name: 'Hello' });
-    id = response.data?._id || '';
 
+    id = response.data?._id || '';
     expect(response.status).toBe(201);
   });
 
   test('second create', async () => {
     const response = await kontenbase
-      .service<Todo>(SECOND_SERVICE_NAME)
+      .service<Categories>(SECOND_SERVICE_NAME)
       .create({ name: 'Yes' });
 
     secondId = response.data?._id || '';
+    expect(response.status).toBe(201);
+  });
+
+  test('createMany', async () => {
+    const response = await kontenbase
+      .service<Todo>(SERVICE_NAME)
+      .createMany([{ name: 'foo' }, { name: 'bar' }]);
+
+    ids = response.data?.map((item) => item._id) || [];
     expect(response.status).toBe(201);
   });
 
@@ -127,7 +141,7 @@ describe('Client', () => {
   test('find error', async () => {
     const response = await kontenbase.service<Todo>(SERVICE_NAME + '1').find();
 
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(404);
     expect(typeof response.error?.message).toBe('string');
   });
 
@@ -140,7 +154,16 @@ describe('Client', () => {
   test('updateById', async () => {
     const response = await kontenbase
       .service<Todo>(SERVICE_NAME)
-      .updateById(id, { name: 'Updated' });
+      .updateById(id, { name: 'Hello updated' });
+
+    expect(response.status).toBe(200);
+  });
+
+  test('updateMany', async () => {
+    const response = await kontenbase.service<Todo>(SERVICE_NAME).updateMany([
+      { _id: ids[0], name: 'bar' },
+      { _id: ids[1], name: 'foo' },
+    ]);
 
     expect(response.status).toBe(200);
   });
@@ -171,8 +194,16 @@ describe('Client', () => {
 
   test('second deleteById', async () => {
     const response = await kontenbase
-      .service<Todo>(SECOND_SERVICE_NAME)
+      .service<Categories>(SECOND_SERVICE_NAME)
       .deleteById(secondId);
+
+    expect(response.status).toBe(200);
+  });
+
+  test('deleteMany', async () => {
+    const response = await kontenbase
+      .service<Todo>(SERVICE_NAME)
+      .deleteMany(ids);
 
     expect(response.status).toBe(200);
   });
@@ -187,7 +218,6 @@ describe('Client', () => {
 
   test('fields', async () => {
     const response = await kontenbase.service(SERVICE_NAME).field.find();
-    console.log(response);
 
     expect(response.status).toBe(200);
   });
@@ -212,7 +242,7 @@ test('count', async () => {
   expect(response.status).toBe(200);
 });
 
-describe('field', async () => {
+describe('Field', () => {
   let id: string;
 
   const login = () => {
@@ -230,6 +260,7 @@ describe('field', async () => {
   test('find', async () => {
     const response = await kontenbase.service(SERVICE_NAME).field.find();
 
+    id = response.data?.[0]?.id || '';
     expect(response.status).toBe(200);
   });
 

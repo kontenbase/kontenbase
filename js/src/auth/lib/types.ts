@@ -39,6 +39,10 @@ export type LookupGetId<T> = {
   _id: Array<keyof Partial<T>> | '*';
 };
 
+export type LookupGetAll<T> = {
+  '*': Array<keyof Partial<T>> | '*';
+};
+
 export type GetUserOption<T> = {
-  lookup?: Array<keyof Partial<T>> | '*' | LookupGetId<T>;
+  lookup?: Array<keyof Partial<T>> | '*' | LookupGetId<T> | LookupGetAll<T>;
 };
