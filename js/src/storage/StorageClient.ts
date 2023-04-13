@@ -4,7 +4,7 @@ import {
   StorageSingleResponse,
   Storage,
 } from './lib/types';
-import FormData from 'isomorphic-form-data';
+import FormData from 'form-data';
 import { AuthClient } from '../auth';
 
 export default class StorageClient {
