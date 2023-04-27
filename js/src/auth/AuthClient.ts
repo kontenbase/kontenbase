@@ -75,8 +75,8 @@ export default class AuthClient {
           `${this.url}/auth/login`,
           body,
         );
-        this.saveToken(data.token);
 
+        this.saveToken(data.token);
         const user = data.user;
         resolve({
           user,
@@ -103,8 +103,8 @@ export default class AuthClient {
           `${this.url}/auth/register`,
           body,
         );
-        this.saveToken(data.token);
 
+        this.saveToken(data.token);
         const user = data.user;
         resolve({
           user,
@@ -203,6 +203,65 @@ export default class AuthClient {
         });
       } catch (error) {
         resolve(this._error(error));
+      }
+    });
+  }
+
+  async verifyToken<T = any>(): Promise<AuthResponse<T>> {
+    return new Promise(async (resolve, _reject) => {
+      try {
+        const { data, status, statusText } = await axios.post<TokenResponse<T>>(
+          `${this.url}/auth/verify-token`,
+          null,
+          {
+            headers: this._headers(),
+          },
+        );
+
+        const user = data.user;
+        resolve({
+          user,
+          status,
+          statusText,
+          token: data.token,
+        });
+      } catch (error) {
+        resolve(this._error(error));
+      }
+    });
+  }
+
+  async changePassword(body: {
+    oldPassword: string;
+    newPassword: string;
+  }): Promise<{
+    message?: string;
+    error?: any;
+    status: number;
+    statusText: string;
+  }> {
+    return new Promise(async (resolve, _reject) => {
+      try {
+        const { data, status, statusText } = await axios.post<{
+          message: string;
+        }>(`${this.url}/auth/change-password`, body, {
+          headers: this._headers(),
+        });
+
+        const message = data.message;
+        resolve({
+          message,
+          status,
+          statusText,
+        });
+      } catch (error) {
+        resolve({
+          error: {
+            message: 'Failed',
+          },
+          status: 500,
+          statusText: 'FAILED',
+        });
       }
     });
   }

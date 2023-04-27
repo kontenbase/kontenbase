@@ -105,6 +105,23 @@ describe('Client', () => {
     expect(response.token).toBe(token);
   });
 
+  test('verify token', async () => {
+    const token = kontenbase.auth.token();
+    const response = await kontenbase.auth.verifyToken();
+
+    expect(response.status).toBe(200);
+    expect(response.token).toBe(token);
+  });
+
+  test('change password', async () => {
+    const response = await kontenbase.auth.changePassword({
+      oldPassword: PASSWORD,
+      newPassword: PASSWORD,
+    });
+
+    expect(response.status).toBe(200);
+  });
+
   test('create', async () => {
     const response = await kontenbase
       .service<Todo>(SERVICE_NAME)
