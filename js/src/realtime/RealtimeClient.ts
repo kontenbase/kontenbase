@@ -5,9 +5,8 @@ import {
   RealtimeCallback,
   SubscribeOption,
 } from './lib/types';
-
-const Centrifuge = require('centrifuge');
-const WebSocket = require('isomorphic-ws');
+import Centrifuge from 'centrifuge';
+import WebSocket from 'isomorphic-ws';
 
 export default class RealtimeClient {
   protected option: RealtimeClientOption;
