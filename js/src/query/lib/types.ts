@@ -82,7 +82,7 @@ export type FindOption<T> = {
   limit?: number;
   skip?: number;
   where?: Where<T>;
-  sort?: { [P in keyof Partial<T>]: 1 | -1 };
+  sort?: { [P in keyof Partial<T>]: 1 | -1 }[];
   select?: Array<keyof Partial<T>>;
   lookup?: Array<keyof Partial<T>> | '*' | LookupGetId<T> | LookupGetAll<T>;
   or?: Array<Where<T>>;
