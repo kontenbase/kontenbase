@@ -55,7 +55,7 @@ export default class AuthClient {
     if (option) {
       let filter: any = {};
 
-      if (option.lookup) {
+      if (typeof option.lookup !== 'undefined') {
         filter['$lookup'] = option.lookup;
         delete option.lookup;
       }

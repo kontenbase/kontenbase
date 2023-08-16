@@ -56,37 +56,37 @@ export default class QueryClient<T> {
     let query = '';
     if (option) {
       let filter: any = {};
-      if (option.skip) {
+      if (typeof option.skip !== 'undefined') {
         filter['$skip'] = option.skip;
         delete option.skip;
       }
 
-      if (option.limit) {
+      if (typeof option.limit !== 'undefined') {
         filter['$limit'] = option.limit;
         delete option.limit;
       }
 
-      if (option.sort) {
+      if (typeof option.sort !== 'undefined') {
         filter['$sort'] = option.sort;
         delete option.sort;
       }
 
-      if (option.select) {
+      if (typeof option.select !== 'undefined') {
         filter['$select'] = option.select;
         delete option.select;
       }
 
-      if (option.lookup) {
+      if (typeof option.lookup !== 'undefined') {
         filter['$lookup'] = option.lookup;
         delete option.lookup;
       }
 
-      if (option.or) {
+      if (typeof option.or !== 'undefined') {
         filter['$or'] = option.or;
         delete option.or;
       }
 
-      if (option.where) {
+      if (typeof option.where !== 'undefined') {
         filter = {
           ...filter,
           ...option.where,
