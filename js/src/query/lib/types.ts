@@ -50,10 +50,10 @@ type Where<T> =
   | {
       [P in keyof Partial<T> | string]:
         | {
-            ['$in']?: [string | number | boolean];
+            ['$in']?: (string | number | boolean)[];
           }
         | {
-            ['$nin']?: [string | number | boolean];
+            ['$nin']?: (string | number | boolean)[];
           }
         | {
             ['$ne']?: string | number | boolean;
