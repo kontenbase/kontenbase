@@ -35,14 +35,19 @@ export type ProfileResponse<T> =
   | ProfileResponseSuccess<T>
   | AuthResponseFailure;
 
-export type LookupGetId<T> = {
-  _id: Array<keyof Partial<T>> | '*';
+type FieldLookup<T> = {
+  [P in keyof Partial<T> | string]:
+    | {
+        ['$lookup']: Lookup<Record<string, unknown>>;
+      }
+    | '*';
 };
 
-export type LookupGetAll<T> = {
-  '*': Array<keyof Partial<T>> | '*';
+export type Lookup<T> = {
+  '*'?: Array<FieldLookup<T> | keyof T>;
+  _id?: Array<FieldLookup<T> | keyof T | '*'>;
 };
 
 export type GetUserOption<T> = {
-  lookup?: Array<keyof Partial<T>> | '*' | LookupGetId<T> | LookupGetAll<T>;
+  lookup?: Array<keyof Partial<T>> | '*' | Lookup<T>;
 };

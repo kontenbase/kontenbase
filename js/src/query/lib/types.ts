@@ -37,12 +37,17 @@ export type KontenbaseSingleResponse<T> =
   | KontenbaseSingleResponseSuccess<T>
   | KontenbaseResponseFailure;
 
-export type LookupGetId<T> = {
-  _id: Array<keyof Partial<T>> | '*';
+type FieldLookup<T> = {
+  [P in keyof Partial<T> | string]:
+    | {
+        ['$lookup']: Lookup<Record<string, unknown>>;
+      }
+    | '*';
 };
 
-export type LookupGetAll<T> = {
-  '*': Array<keyof Partial<T>> | '*';
+export type Lookup<T> = {
+  '*'?: Array<FieldLookup<T> | keyof T>;
+  _id?: Array<FieldLookup<T> | keyof T | '*'>;
 };
 
 type Where<T> =
@@ -84,7 +89,7 @@ export type FindOption<T> = {
   where?: Where<T>;
   sort?: { [P in keyof Partial<T>]: 1 | -1 }[];
   select?: Array<keyof Partial<T>>;
-  lookup?: Array<keyof Partial<T>> | '*' | LookupGetId<T> | LookupGetAll<T>;
+  lookup?: Array<keyof Partial<T>> | '*' | Lookup<T>;
   or?: Array<Where<T>>;
 };
 
@@ -95,7 +100,7 @@ export type CountOption<T> = {
 
 export type GetByIdOption<T> = {
   select?: Array<keyof Partial<T>>;
-  lookup?: Array<keyof Partial<T>> | '*' | LookupGetId<T> | LookupGetAll<T>;
+  lookup?: Array<keyof Partial<T>> | '*' | Lookup<T>;
 };
 
 export interface QueryClientOption {
