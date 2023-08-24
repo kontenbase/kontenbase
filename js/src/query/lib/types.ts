@@ -80,6 +80,12 @@ type Where<T> =
           }
         | {
             ['$gte']?: number;
+          }
+        | {
+            ['isEmpty']?: boolean;
+          }
+        | {
+            ['isNotEmpty']?: boolean;
           };
     };
 
