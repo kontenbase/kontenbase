@@ -60,7 +60,7 @@ export default class AuthClient {
         delete option.lookup;
       }
 
-      query = qs.stringify(filter, { encode: false });
+      query = qs.stringify(filter, { encodeValuesOnly: true });
     }
     return query;
   }
