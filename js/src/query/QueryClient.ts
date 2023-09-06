@@ -93,7 +93,7 @@ export default class QueryClient<T> {
         };
       }
 
-      query = qs.stringify(filter, { encode: false });
+      query = qs.stringify(filter, { encodeValuesOnly: true });
     }
     return query;
   }
